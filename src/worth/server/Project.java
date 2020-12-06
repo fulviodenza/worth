@@ -41,6 +41,11 @@ public class Project {
         return 0;
     }
 
-    /*public int moveCard(Card card, CardStatus status) {
-    }*/
+    public int moveCard(Card card, CardStatus status) {
+        if(taskList.contains(card)) {
+            card.changeStatus(status);
+            return 0;
+        }
+        return 1;
+    }
 }

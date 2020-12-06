@@ -23,6 +23,21 @@ public class Card {
         if(this.status == status) {
             System.out.println("The Card is already in this status");
             return 1;
+        } else {
+            if(this.status == TODO && status == IN_PROGRESS) {
+                this.status = status;
+                System.out.println("Status changed to IN_PROGRESS");
+            } else if (this.status == IN_PROGRESS && (status == TO_BE_REVISED || status == DONE)) {
+                this.status = status;
+                System.out.println("Status changed to TO_BE_REVISED OR to DONE");
+            } else if (this.status == TO_BE_REVISED && status == DONE) {
+                this.status = status;
+                System.out.println("Status changed to DONE");
+                return 0;
+            } else {
+                System.out.println("The status changing is not possible");
+                return 1;
+            }
         }
         this.status = status;
         System.out.println("The Card has been moved to the desired status");
