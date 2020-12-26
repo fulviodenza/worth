@@ -17,9 +17,9 @@ public class RemoteHandlerClient {
             Registry registry = LocateRegistry.getRegistry(5455);
             RegisterUserInterface stub = (RegisterUserInterface) registry.lookup("RegisterUserInterface");
             if(stub.register(username, password) == 0) {
-                System.out.println("You have been successfully registered\n");
+                System.out.println("CLIENT: You have been successfully registered");
             } else {
-                System.out.println("You're already present in the Database!\n");
+                System.out.println("CLIENT: You're already present in the Database!");
             }
         } catch (Exception | UserAlreadyPresent | EmptyPassword e) {
             e.printStackTrace();

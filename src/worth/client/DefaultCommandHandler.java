@@ -3,26 +3,17 @@ package worth.client;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public abstract class CommandHandler {
+public class DefaultCommandHandler {
 
-    public void startCompute(String msg) {
-        Scanner scanner = new Scanner(msg != null ? msg : "");
-        compute(scanner);
-        scanner.close();
-    }
-
-    public abstract void compute(Scanner scanner);
-}
-
-class DefaultCommandHandler extends CommandHandler {
-
-    public void compute(Scanner scanner) {
+    public static void compute(String cmd) {
         try {
-            String cmd = scanner.next();
+            Scanner scanner = new Scanner(System.in);
             switch(cmd) {
                 case "register":
                     try {
                         RemoteHandlerClient rui = new RemoteHandlerClient();
+                        System.out.println("Insert Username and Password");
+                        System.out.print("> ");
                         String username = scanner.next();
                         String password = scanner.next();
                         rui.registerStub(username, password);
@@ -30,7 +21,7 @@ class DefaultCommandHandler extends CommandHandler {
                         e.printStackTrace();
                     }
                     break;
-                case "other_command":
+                case "login":
                     System.out.println("Do something");
             }
         } catch (NoSuchElementException e) {

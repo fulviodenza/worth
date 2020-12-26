@@ -1,5 +1,8 @@
 package worth.server;
 
+import com.google.gson.*;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Member {
@@ -21,5 +24,35 @@ public class Member {
         }
         projectList.add(projectName);
         return 0;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public static class MemberJsonSerializer implements JsonSerializer<Member> {
+
+        public JsonElement serialize(Member user, Type src, JsonSerializationContext context) {
+            JsonObject obj = new JsonObject();
+            obj.add("username", new JsonPrimitive(user.getUsername()));
+            obj.add("password", new JsonPrimitive(user.getPassword()));
+            return obj;
+        }
+    }
+
+    public static class MemberJsonDeserializer implements JsonDeserializer<Member> {
+
+        public Member deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+                throws JsonParseException {
+            JsonObject obj = json.getAsJsonObject();
+            return new Member(
+                    obj.getAsJsonPrimitive("username").getAsString(),
+                    obj.getAsJsonPrimitive("password").getAsString()
+            );
+        }
     }
 }

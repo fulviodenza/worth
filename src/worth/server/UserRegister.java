@@ -15,6 +15,8 @@ public class UserRegister extends RemoteServer implements RegisterUserInterface 
     @Override
     public int register(String nickname, String password) throws RemoteException, UserAlreadyPresent, EmptyPassword {
         Member m = new Member(nickname, password);
+        Database.getDatabase().updateMember(m);
+        System.out.printf("SERVER: %s registered", nickname);
         return 0;
     }
 
