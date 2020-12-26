@@ -14,12 +14,17 @@ import java.rmi.server.UnicastRemoteObject;
 public class UserRegister extends RemoteServer implements RegisterUserInterface {
     @Override
     public int register(String nickname, String password) throws RemoteException, UserAlreadyPresent, EmptyPassword {
-        Member m = new Member(nickname, password);
-        Database.getDatabase().updateMember(m);
-        System.out.printf("SERVER: %s registered", nickname);
-        return 0;
-    }
 
+        if(!Database.getDatabase().containsUser(nickname)) {
+            Member m = new Member(nickname, password);
+            Database.getDatabase().updateMember(m);
+            System.out.printf("SERVER: %s registered\n", nickname);
+            return 0;
+        } else {
+            System.out.printf("SERVER: %s already registered!\n", nickname);
+            return 1;
+        }
+    }
     public void RemoteHandler(int port) {
         try {
             UserRegister ur = new UserRegister();

@@ -3,6 +3,7 @@ package worth.server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import worth.exceptions.MemberNotFoundException;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -88,12 +89,36 @@ public class Database {
 
     public static synchronized void updateMember(Member user) {
         try {
-            db.put(user.getUsername(), user);
-            BufferedWriter writer = Files.newBufferedWriter(dbFile, StandardCharsets.UTF_8);
-            writer.write(createGsonBuilder().toJson(db.values()));
-            writer.flush();
+            if(!db.contains(user)) {
+                db.put(user.getUsername(), user);
+                BufferedWriter writer = Files.newBufferedWriter(dbFile, StandardCharsets.UTF_8);
+                writer.write(createGsonBuilder().toJson(db.values()));
+                writer.flush();
+            } else {
+                System.out.println("User Already present");
+                System.exit(1);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public static Member getUser(String nickname) throws MemberNotFoundException {
+
+        if(db.containsKey(nickname)) {
+            return db.get(nickname);
+        } else {
+            throw new MemberNotFoundException();
+        }
+    }
+
+    public static synchronized boolean containsUser(String nick) {
+        try {
+            getUser(nick);
+            return true;
+        } catch(MemberNotFoundException e) {
+            return false;
+        }
+    }
+
 }
