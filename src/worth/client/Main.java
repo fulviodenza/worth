@@ -6,9 +6,8 @@ import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 
 public class Main {
-    public static void main(String args[]) {
-        //ClientConnection cc = new ClientConnection(new InetSocketAddress("0.0.0.0", 5454));
-        //cc.start();
+    public static void main(String args[]) throws IOException {
+        TCPClient clientConnection = new TCPClient();
 
         while(!Thread.interrupted()) {
             try {
@@ -16,7 +15,7 @@ public class Main {
                 InputStreamReader streamReader = new InputStreamReader(System.in);
                 BufferedReader bufferedReader = new BufferedReader(streamReader);
                 String command = bufferedReader.readLine();
-                DefaultCommandHandler.compute(command);
+                clientConnection.compute(command);
             } catch (IOException e) {
                 e.printStackTrace();
             }

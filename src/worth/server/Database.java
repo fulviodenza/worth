@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -52,26 +51,6 @@ public class Database {
         }
     }
 
-//    public static int register(String username, String password) {
-//        try {
-//            Member m = new Member(username, password);
-//            if (userDB == null) {
-//                userDB = new ArrayList<>();
-//            }
-//            if (!userDB.contains(m)) {
-//                userDB.add(m);
-//            }
-//
-//            Writer writer = new FileWriter("database/db.json");
-//            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//            gson.toJson(userDB, writer);
-//            writer.flush();
-//            writer.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return 0;
-//    }
     public static Database getDatabase() {
         try {
             if (database == null) {

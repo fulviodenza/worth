@@ -1,77 +1,68 @@
 package worth.server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import worth.MemberStatus;
+import worth.exceptions.MemberNotFoundException;
+
+import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
-public class ConnectionHandler extends Thread{
+public class ConnectionHandler implements Runnable{
+    private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
+    private Scanner sc;
+    private boolean logged;
+    private Member member;
 
-    final DataInputStream dis;
-    final DataOutputStream dos;
-    final Socket s;
-
-
-    // Constructor
-    public ConnectionHandler(Socket s, DataInputStream dis, DataOutputStream dos)
-    {
-        this.s = s;
-        this.dis = dis;
-        this.dos = dos;
+    public ConnectionHandler(Socket socket) {
+        this.logged = false;
+        this.clientSocket = socket;
+        sc = new Scanner(System.in);
     }
 
-    @Override
-    public void run()
-    {
-        String received;
-        String toreturn;
-        while (true)
-        {
-            try {
-
-                // Ask user what he wants
-                dos.writeUTF("What do you want?[Date | Time]..\n"+
-                        "Type Exit to terminate connection.");
-
-                // receive the answer from client
-                received = dis.readUTF();
-
-                if(received.equals("Exit"))
-                {
-                    System.out.println("Client " + this.s + " sends exit...");
-                    System.out.println("Closing this connection.");
-                    this.s.close();
-                    System.out.println("Connection closed");
-                    break;
-                }
-
-                // write on output stream based on the
-                // answer from the client
-                switch (received) {
-                    /*
-                    Il client manda una stringa del tipo login@username:password
-                    il server separa login da @username:password e successivamente
-                    separa username da password
-                     */
-                    case "login" :
-                        //TODO
-                        dos.writeUTF("contenuto risultato login operation");
-                        break;
-                    default:
-                        dos.writeUTF("Invalid input");
-                        break;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
+    public void commandHandler(String cmd) {
+        if(cmd == null) throw new NullPointerException();
+        if(cmd.equals(".")) throw new IllegalArgumentException();
+        String[] command = cmd.split("@");
         try {
-            // closing resources
-            this.dis.close();
-            this.dos.close();
+            switch (command[0]) {
+                case "login":
+                    if (!logged) {
+                        String[] info = command[1].split(":");
+                        String username = info[0];
+                        String password = info[1];
 
-        } catch(IOException e){
+                        if (Database.containsUser(username)) {
+                            member = Database.getUser(username);
+                            if (member.getPassword().equals(password)) {
+                                if (member.getMemberStatus() == MemberStatus.ONLINE) {
+                                    System.out.println("User already logged in!");
+                                } else {
+                                    System.out.println("Logged in!");
+                                }
+                            } else {
+                                System.out.println("Wrong Password!");
+                            }
+                        }
+                    }
+                break;
+                default:
+                    System.out.println("Command not available");
+            }
+        } catch (MemberNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void run() {
+        try {
+            out = new PrintWriter(clientSocket.getOutputStream(),true);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            while(true) {
+                commandHandler(in.readLine());
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

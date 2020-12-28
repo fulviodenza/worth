@@ -2,23 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7abeedda-afe0-4b7b-9e64-1a31590a00b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/worth/MemberStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/worth/client/CLICommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/worth/client/TCPClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/worth/server/MemberStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/database.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/ClientConnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/DefaultCommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/DefaultCommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/UserRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/UserRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worth.iml" beforeDir="false" afterPath="$PROJECT_DIR$/worth.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1mDK1aoLdpoCjI7mm5Kq31iAqRM" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -26,12 +47,24 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/gson-2.8.6.jar" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
@@ -55,7 +88,9 @@
       <option name="presentableId" value="Default" />
       <updated>1609022513227</updated>
       <workItem from="1609022518416" duration="455000" />
-      <workItem from="1609023000734" duration="262000" />
+      <workItem from="1609023000734" duration="881000" />
+      <workItem from="1609074436530" duration="9440000" />
+      <workItem from="1609089037050" duration="4031000" />
     </task>
     <servers />
   </component>

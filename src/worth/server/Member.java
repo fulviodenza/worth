@@ -2,6 +2,7 @@ package worth.server;
 
 import com.google.gson.*;
 
+import worth.MemberStatus;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -9,11 +10,13 @@ public class Member {
 
     private String username;
     private String password;
+    private MemberStatus status;
     private ArrayList<String> projectList;
 
     public Member(String username, String password) {
         this.username = username;
         this.password = password;
+        this.status = MemberStatus.OFFLINE;
         projectList = new ArrayList<>();
     }
 
@@ -32,6 +35,14 @@ public class Member {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setMemberStatus(MemberStatus newStatus) {
+        status = newStatus;
+    }
+
+    public MemberStatus getMemberStatus() {
+        return status;
     }
 
     public static class MemberJsonSerializer implements JsonSerializer<Member> {
