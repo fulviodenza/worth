@@ -54,6 +54,7 @@ public class TCPClient {
                     entireCommand = command.manage(scanner);
                     System.out.printf("Sent %s command\n", entireCommand);
                     out.println(entireCommand);
+                    System.out.println(in.readLine());
                     break;
                 case "logout":
                     System.out.println("Sending logout command");
@@ -61,6 +62,7 @@ public class TCPClient {
                     entireCommand = command.manage(scanner);
                     System.out.printf("Sent %s command\n", entireCommand);
                     out.println(entireCommand);
+                    System.out.println(in.readLine());
                     break;
                 default:
                     System.out.println("Invalid command");

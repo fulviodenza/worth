@@ -34,37 +34,45 @@ public class ConnectionHandler implements Runnable{
                         String username = info[0];
                         String password = info[1];
 
-                        Database.getDatabase().printUsers();
                         if (Database.getDatabase().containsUser(username)) {
                             member = Database.getDatabase().getUser(username);
                             if (member.getPassword().equals(password)) {
                                 if (member.getMemberStatus() == MemberStatus.ONLINE) {
                                     System.out.println("User already logged in!");
+                                    out.println("SERVER: User already logged in!");
                                 } else {
                                     member.setMemberStatus(MemberStatus.ONLINE);
                                     System.out.println("Logged in!");
+                                    out.println("SERVER: Logged in!");
                                     logged = true;
+                                    Database.getDatabase().printUsers();
                                 }
                             } else {
                                 System.out.println("Wrong Password!");
+                                out.println("SERVER: Wrong Password!");
                             }
                         }
                     } else {
                         System.out.println("Already logged in from this terminal");
+                        out.println("SERVER: Already logged in from this terminal");
                     }
                     break;
                 case "logout":
                     System.out.println("Received logout command");
                     if(!logged) {
                         System.out.println("No user was logged here");
+                        out.println("SERVER: No user was logged here");
+
                     } else {
                         logged = false;
                         member.setMemberStatus(MemberStatus.OFFLINE);
                         System.out.println("Logged out");
+                        out.println("SERVER: logged out");
                     }
                     break;
                 default:
                     System.out.println("Command not available");
+                    out.println("SERVER: Command not available");
             }
         } catch (MemberNotFoundException e) {
             e.printStackTrace();
