@@ -18,3 +18,10 @@ class LoginHandler extends CLICommand {
         return finalCommand;
     }
 }
+
+class LogoutHandler extends CLICommand {
+
+    public String manage(Scanner scanner) {
+        return "logout";
+    }
+}

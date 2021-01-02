@@ -31,6 +31,8 @@ public class TCPClient {
     public void compute(String cmd) throws IOException {
         try {
             this.startConnection();
+            CLICommand command;
+            String entireCommand;
             Scanner scanner = new Scanner(System.in);
             switch(cmd) {
                 case "register":
@@ -46,10 +48,17 @@ public class TCPClient {
                     }
                     break;
                 case "login":
-                    this.startConnection();
-                    System.out.println("Received login command");
-                    CLICommand command = new LoginHandler();
-                    String entireCommand = command.manage(scanner);
+                    //this.startConnection();
+                    System.out.println("Sending login command");
+                    command = new LoginHandler();
+                    entireCommand = command.manage(scanner);
+                    System.out.printf("Sent %s command\n", entireCommand);
+                    out.println(entireCommand);
+                    break;
+                case "logout":
+                    System.out.println("Sending logout command");
+                    command = new LogoutHandler();
+                    entireCommand = command.manage(scanner);
                     System.out.printf("Sent %s command\n", entireCommand);
                     out.println(entireCommand);
                     break;

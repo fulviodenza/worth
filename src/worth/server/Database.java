@@ -101,7 +101,7 @@ public class Database {
     }
 
     public static synchronized void printUsers() {
-        db.forEach((k,v) -> System.out.printf("username: %s", k));
+        db.forEach((k,v) -> System.out.printf("username: %s, status: %s\n", k, v.getMemberStatus()));
     }
 
 }

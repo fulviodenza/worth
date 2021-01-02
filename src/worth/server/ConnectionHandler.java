@@ -27,22 +27,14 @@ public class ConnectionHandler implements Runnable{
         String[] command = cmd.split("@");
         try {
             switch (command[0]) {
-                case "register":
-                    System.out.println("Received register command");
-                    break;
                 case "login":
                     if (!logged) {
                         System.out.println("Received login command");
                         String[] info = command[1].split(":");
-                        System.out.println("1");
-
                         String username = info[0];
-                        System.out.println("2");
                         String password = info[1];
-                        System.out.println("3");
 
-                        System.out.printf("%b", Database.getDatabase().containsUser(username));
-                        Database.printUsers();
+                        Database.getDatabase().printUsers();
                         if (Database.getDatabase().containsUser(username)) {
                             member = Database.getDatabase().getUser(username);
                             if (member.getPassword().equals(password)) {
@@ -59,6 +51,16 @@ public class ConnectionHandler implements Runnable{
                         }
                     } else {
                         System.out.println("Already logged in from this terminal");
+                    }
+                    break;
+                case "logout":
+                    System.out.println("Received logout command");
+                    if(!logged) {
+                        System.out.println("No user was logged here");
+                    } else {
+                        logged = false;
+                        member.setMemberStatus(MemberStatus.OFFLINE);
+                        System.out.println("Logged out");
                     }
                     break;
                 default:

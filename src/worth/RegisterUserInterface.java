@@ -5,6 +5,7 @@ import worth.exceptions.UserAlreadyPresent;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public interface RegisterUserInterface extends Remote {
 

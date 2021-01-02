@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7abeedda-afe0-4b7b-9e64-1a31590a00b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/runClient.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/runServer.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/database.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/RegisterUserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/RegisterUserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/CLICommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/CLICommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/TCPClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worth.iml" beforeDir="false" afterPath="$PROJECT_DIR$/worth.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +70,8 @@
       <workItem from="1609089037050" duration="4031000" />
       <workItem from="1609149426895" duration="4722000" />
       <workItem from="1609581142510" duration="391000" />
-      <workItem from="1609581576411" duration="1840000" />
+      <workItem from="1609581576411" duration="4309000" />
+      <workItem from="1609599114573" duration="1213000" />
     </task>
     <servers />
   </component>
