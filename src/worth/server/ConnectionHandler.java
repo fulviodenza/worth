@@ -27,26 +27,40 @@ public class ConnectionHandler implements Runnable{
         String[] command = cmd.split("@");
         try {
             switch (command[0]) {
+                case "register":
+                    System.out.println("Received register command");
+                    break;
                 case "login":
                     if (!logged) {
+                        System.out.println("Received login command");
                         String[] info = command[1].split(":");
-                        String username = info[0];
-                        String password = info[1];
+                        System.out.println("1");
 
-                        if (Database.containsUser(username)) {
-                            member = Database.getUser(username);
+                        String username = info[0];
+                        System.out.println("2");
+                        String password = info[1];
+                        System.out.println("3");
+
+                        System.out.printf("%b", Database.getDatabase().containsUser(username));
+                        Database.printUsers();
+                        if (Database.getDatabase().containsUser(username)) {
+                            member = Database.getDatabase().getUser(username);
                             if (member.getPassword().equals(password)) {
                                 if (member.getMemberStatus() == MemberStatus.ONLINE) {
                                     System.out.println("User already logged in!");
                                 } else {
+                                    member.setMemberStatus(MemberStatus.ONLINE);
                                     System.out.println("Logged in!");
+                                    logged = true;
                                 }
                             } else {
                                 System.out.println("Wrong Password!");
                             }
                         }
+                    } else {
+                        System.out.println("Already logged in from this terminal");
                     }
-                break;
+                    break;
                 default:
                     System.out.println("Command not available");
             }
