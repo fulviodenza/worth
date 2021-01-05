@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Project {
 
     public String projectName;
+    public String usernameCreator;
     public ArrayList<String> memberList;
     public ArrayList<Card> taskList;
     public ArrayList<Card> TODO_List;
@@ -12,10 +13,11 @@ public class Project {
     public ArrayList<Card> TO_BE_REVISED_List;
     public ArrayList<Card> DONE_List;
 
-    public Project(String projectName) {
+    public Project(String usernameCreator, String projectName) {
 
         this.projectName = projectName;
         memberList = new ArrayList<>();
+        memberList.add(usernameCreator);
         taskList = new ArrayList<>();
     }
 

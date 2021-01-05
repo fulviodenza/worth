@@ -1,0 +1,15 @@
+madonna:OFFLINE
+vino:OFFLINE
+cocco:OFFLINE
+luiggi:OFFLINE
+djdsj:OFFLINE
+ciccio:OFFLINE
+paola:OFFLINE
+dio:ONLINE
+cis:OFFLINE
+anna:OFFLINE
+fulvio:ONLINE
+pasqua:OFFLINE
+cazzo:OFFLINE
+bobo:OFFLINE
+luca:OFFLINE

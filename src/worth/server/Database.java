@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Database {
     private static volatile Database database;
@@ -104,4 +105,13 @@ public class Database {
         db.forEach((k,v) -> System.out.printf("username: %s, status: %s\n", k, v.getMemberStatus()));
     }
 
+    public String getListUsers() {
+        String output = "";
+        for(Member m : db.values()) {
+            output += m.getUsername() + ":" + m.getMemberStatus() + "$";
+        }
+        return output;
+    }
 }
+
+
