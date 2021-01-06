@@ -110,7 +110,7 @@ class ListOnlineUsers extends CLICommand {
         String output = "";
         while(fileScanner.hasNextLine()) {
             String data = fileScanner.nextLine();
-            if(data.contains("online")) {
+            if(data.contains("ONLINE")) {
                 output += data + "\n";
             }
         }

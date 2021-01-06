@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7abeedda-afe0-4b7b-9e64-1a31590a00b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/worth/client/ClientNotification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/worth/client/ClientNotificationInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/worth/client/users.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/worth/server/ServerNotification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/worth/server/ServerNotificationInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/database.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/client/CLICommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/CLICommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/client/DefaultCommandHandler.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/client/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/TCPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/ServerConnection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +83,7 @@
       <workItem from="1609581576411" duration="4309000" />
       <workItem from="1609599114573" duration="3526000" />
       <workItem from="1609688330785" duration="1849000" />
-      <workItem from="1609838487197" duration="26921000" />
+      <workItem from="1609838487197" duration="28136000" />
     </task>
     <servers />
   </component>

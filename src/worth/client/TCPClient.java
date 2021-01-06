@@ -86,7 +86,12 @@ public class TCPClient {
                 case "create_project":
                     break;
                 case "list_users":
-
+                    list = new ListUsers();
+                    System.out.println(list.manage(scanner));
+                    break;
+                case "list_online_users":
+                    ListOnlineUsers listOnline = new ListOnlineUsers();
+                    System.out.println(listOnline.manage(scanner));
                     break;
                 default:
                     System.out.println("Invalid command");

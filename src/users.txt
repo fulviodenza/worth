@@ -5,7 +5,7 @@ luiggi:OFFLINE
 djdsj:OFFLINE
 ciccio:OFFLINE
 paola:OFFLINE
-dio:ONLINE
+dio:OFFLINE
 cis:OFFLINE
 anna:OFFLINE
 fulvio:ONLINE
