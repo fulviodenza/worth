@@ -40,10 +40,12 @@ public class Project {
         File in_progress = new File(path+"in_progress_list.json");
         File to_be_revised = new File(path+"to_be_revised.json");
         File done = new File(path+"done.json");
+        File cards = new File(path+"cards.json");
 
         path = Paths.get("../projects/"+projectName+"/");
     }
 
+    //CREAZIONE PROGETTO
     public void createDirectory(String projectName) {
         try {
             if(Files.exists(Path.of("../projects/" + projectName + "/"))){
@@ -58,11 +60,11 @@ public class Project {
         }
     }
 
+    //METODI PER AGGIUNTA MEMBRO AL PROGETTO
     public void addMember(String username) {
         if(!memberList.contains(username)) {
             this.memberList.add(username);
             updateUserList();
-            System.out.println("Member added");
         } else {
             System.out.println("username already present in the member list!");
         }
@@ -97,6 +99,32 @@ public class Project {
         }
     }
 
+    public void updateTODOList() {
+        Writer writer;
+        try {
+            writer = new FileWriter(path+"/todo_list.json");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(TODO_List, writer);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readCardList() {
+        Gson gson = new Gson();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(path+"/cards.json"));
+            Type type = new TypeToken<ArrayList<Card>>() {
+            }.getType();
+            taskList = gson.fromJson(br, type);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      *
      * @param cardName the name of the card
@@ -109,11 +137,26 @@ public class Project {
                 System.out.println("The task is already in the Card list");
             }
         }
+        readCardList();
         //By default a card is added to TODO_LIST
         Card newCard = new Card(cardName, cardDescription);
         taskList.add(newCard);
         TODO_List.add(newCard);
+        updateCardList();
         System.out.println("Card created");
+    }
+
+    public void updateCardList() {
+        Writer writer;
+        try {
+            writer = new FileWriter(path+"/cards.json");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(taskList, writer);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String showMembers() {

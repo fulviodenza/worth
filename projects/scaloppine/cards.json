@@ -1,0 +1,17 @@
+[
+  {
+    "name": "uova",
+    "description": "uova",
+    "status": "TODO"
+  },
+  {
+    "name": "farina",
+    "description": "farina",
+    "status": "TODO"
+  },
+  {
+    "name": "carne",
+    "description": "carne",
+    "status": "TODO"
+  }
+]

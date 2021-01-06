@@ -1,5 +1,5 @@
 madonna:OFFLINE
-vino:OFFLINE
+vino:ONLINE
 cocco:OFFLINE
 luiggi:OFFLINE
 djdsj:OFFLINE
@@ -8,8 +8,9 @@ paola:OFFLINE
 dio:OFFLINE
 cis:OFFLINE
 anna:OFFLINE
-fulvio:ONLINE
+fulvio:OFFLINE
 pasqua:OFFLINE
 cazzo:OFFLINE
+cubo:OFFLINE
 bobo:OFFLINE
 luca:OFFLINE
