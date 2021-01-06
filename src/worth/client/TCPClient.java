@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -77,13 +78,12 @@ public class TCPClient {
                     break;
                 case "logout":
                     System.out.println("Sending logout command");
+                    System.out.println("write your username");
                     command = new LogoutHandler();
                     entireCommand = command.manage(scanner);
                     System.out.printf("Sent %s command\n", entireCommand);
                     out.println(entireCommand);
                     System.out.println(in.readLine());
-                    break;
-                case "create_project":
                     break;
                 case "list_users":
                     list = new ListUsers();
@@ -93,8 +93,40 @@ public class TCPClient {
                     ListOnlineUsers listOnline = new ListOnlineUsers();
                     System.out.println(listOnline.manage(scanner));
                     break;
+                case "create_project":
+                    System.out.println("Received create_project command");
+                    System.out.println("insert the project name");
+                    command = new CreateProject();
+                    out.println(command.manage(scanner));
+                    break;
+                case "add_card":
+                    System.out.println("Received add_card command");
+                    System.out.println("insert the project name, the card name and the description");
+                    command = new CreateCard();
+                    out.println(command.manage(scanner));
+                    break;
+                case "add_member":
+                    System.out.println("Received add_member command");
+                    System.out.println("insert the project name and the username you want to add to project");
+                    command = new AddUser();
+                    out.println(command.manage(scanner));
+                    break;
+                case "show_members":
+                    System.out.println("Recevied show_members command");
+                    System.out.println("insert the project you want show members for");
+                    command = new ShowMembers();
+                    out.println(command.manage(scanner));
+
+                    String memberList = in.readLine();
+                    memberList = memberList.replace("$", "\n");
+                    System.out.print(memberList);
+                    break;
+                case "list_projects":
+                    command = new ListProjects();
+                    out.println(command.manage(scanner));
+                    break;
                 default:
-                    System.out.println("Invalid command");
+                    System.out.println("Invalid command"+cmd);
             }
         } catch (NoSuchElementException | IOException | NotBoundException e) {
             e.printStackTrace();

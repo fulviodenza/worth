@@ -63,9 +63,9 @@ class CreateProject extends CLICommand {
     }
 
     public String manage(Scanner scanner) {
-        String usernameCreator = scanner.next();
         String projectName = scanner.next();
-        return "create_project@"+usernameCreator+":"+projectName;
+        System.out.println("create_project@"+projectName);
+        return "create_project@"+projectName;
     }
 }
 
@@ -116,5 +116,55 @@ class ListOnlineUsers extends CLICommand {
         }
         fileScanner.close();
         return output;
+    }
+}
+
+class CreateCard extends CLICommand {
+
+    protected CreateCard() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+        String cardName = scanner.next();
+        String cardDescription = scanner.next();
+        System.out.println("Sending command add_card@"+projectName+":"+cardName+":"+cardDescription);
+        return "add_card@"+projectName+":"+cardName+":"+cardDescription;
+    }
+}
+
+class AddUser extends CLICommand {
+
+    protected AddUser() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+        String usernameToAdd = scanner.next();
+        System.out.println("Sending command add_member@"+projectName+":"+usernameToAdd);
+        return "add_member@"+projectName+":"+usernameToAdd;
+    }
+}
+
+class ShowMembers extends CLICommand {
+
+    protected ShowMembers() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+        System.out.println("Sending command show_members@"+projectName);
+        return "show_members@"+projectName;
+    }
+}
+
+class ListProjects extends CLICommand {
+
+    protected ListProjects() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        System.out.println("Sending command list_projects");
+        return "list_projects";
     }
 }

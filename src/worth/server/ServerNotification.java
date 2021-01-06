@@ -1,17 +1,9 @@
 package worth.server;
 
-import worth.client.ClientNotification;
 import worth.client.ClientNotificationInterface;
-
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.RemoteObject;
-import java.security.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,11 +29,9 @@ public class ServerNotification extends RemoteObject implements ServerNotificati
     }
 
     public synchronized void unregister(ClientNotificationInterface client, String member) throws RemoteException {
-        if(clients.remove(client) && usersList.remove(member)){
-            System.out.println("Client unregistered");
-        } else {
-            System.out.println("Unable to unregister client");
-        }
+        clients.remove(client);
+        usersList.remove(member);
+        System.out.println("Client unregistered");
     }
 
     public void sendMemberList(String memberList) throws RemoteException {

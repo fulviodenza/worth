@@ -11,7 +11,7 @@ public class Member {
     private String username;
     private String password;
     private MemberStatus status;
-    private ArrayList<String> projectList;
+    public ArrayList<String> projectList;
 
     public Member(String username, String password) {
         this.username = username;
@@ -28,6 +28,19 @@ public class Member {
         projectList.add(projectName);
         return 0;
     }
+
+    public boolean isInProject(String projectName) {
+        if(projectList.contains(projectName)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public ArrayList<String> getProjectList() {
+        return projectList;
+    }
+
 
     public String getUsername() {
         return username;

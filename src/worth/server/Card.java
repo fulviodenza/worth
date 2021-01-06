@@ -21,8 +21,6 @@ public class Card {
 
     public int changeStatus (CardStatus status) {
         if(this.status == status) {
-            System.out.println("The Card is already in this status");
-            return 1;
         } else {
             if(this.status == TODO && status == IN_PROGRESS) {
                 this.status = status;
