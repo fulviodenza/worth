@@ -1,66 +1,17 @@
 [
   {
-    "username": "madonna",
-    "password": "cagna"
-  },
-  {
-    "username": "vino",
-    "password": "divino"
-  },
-  {
-    "username": "cocco",
-    "password": "cacca"
-  },
-  {
     "username": "luiggi",
-    "password": "pino"
-  },
-  {
-    "username": "djdsj",
-    "password": "dsjdsjs"
-  },
-  {
-    "username": "ciccio",
-    "password": "benzina"
+    "password": "gesuele",
+    "projectList": []
   },
   {
     "username": "paola",
-    "password": "esposito"
-  },
-  {
-    "username": "dio",
-    "password": "ladro"
-  },
-  {
-    "username": "cis",
-    "password": "alpina"
-  },
-  {
-    "username": "anna",
-    "password": "castaldo"
+    "password": "esposito",
+    "projectList": []
   },
   {
     "username": "fulvio",
-    "password": "pane"
-  },
-  {
-    "username": "pasqua",
-    "password": "pant"
-  },
-  {
-    "username": "cazzo",
-    "password": "merda"
-  },
-  {
-    "username": "cubo",
-    "password": "rubik"
-  },
-  {
-    "username": "bobo",
-    "password": "vieri"
-  },
-  {
-    "username": "luca",
-    "password": "pene"
+    "password": "denza",
+    "projectList": []
   }
 ]

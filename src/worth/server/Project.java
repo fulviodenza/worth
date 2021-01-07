@@ -3,7 +3,9 @@ package worth.server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import worth.exceptions.MemberNotFoundException;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -157,6 +159,26 @@ public class Project {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String showCards() {
+        readCardList();
+        StringBuilder output = new StringBuilder();
+        for(Card c : taskList) {
+            output.append(c.getName()).append("$");
+        }
+        return output.toString();
+    }
+
+    public String showCard(String cardInput) {
+        readCardList();
+        StringBuilder output = new StringBuilder();
+        for(Card c : taskList) {
+            if(c.getName().equals(cardInput)) {
+                output.append("NAME:").append(c.getName()).append("$").append("STATUS:").append(c.getStatus()).append("$").append("DESCRIPTION:").append(c.getDescription());
+            }
+        }
+        return output.toString();
     }
 
     public String showMembers() {

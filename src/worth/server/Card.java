@@ -19,6 +19,10 @@ public class Card {
         this.status = TODO;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public int changeStatus (CardStatus status) {
         if(this.status == status) {
         } else {

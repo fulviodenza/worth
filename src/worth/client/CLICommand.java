@@ -168,3 +168,28 @@ class ListProjects extends CLICommand {
         return "list_projects";
     }
 }
+
+class ShowCards extends CLICommand {
+
+    protected ShowCards() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+        System.out.println("Sending command show_cards@"+projectName);
+        return "show_cards@"+projectName;
+    }
+}
+
+class ShowCard extends CLICommand {
+
+    protected ShowCard() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+        String cardName = scanner.next();
+        System.out.println("Sending command show_card@"+projectName+":"+cardName);
+        return "show_card@"+projectName+":"+cardName;
+    }
+}

@@ -1,16 +1,3 @@
-madonna:OFFLINE
-vino:ONLINE
-cocco:OFFLINE
 luiggi:OFFLINE
-djdsj:OFFLINE
-ciccio:OFFLINE
-paola:OFFLINE
-dio:OFFLINE
-cis:OFFLINE
-anna:OFFLINE
+paola:ONLINE
 fulvio:OFFLINE
-pasqua:OFFLINE
-cazzo:OFFLINE
-cubo:OFFLINE
-bobo:OFFLINE
-luca:OFFLINE

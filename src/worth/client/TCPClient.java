@@ -69,12 +69,12 @@ public class TCPClient {
                     //this.startConnection();
                     System.out.println("Sending login command");
                     command = new LoginHandler();
-                    list = new ListUsers();
                     entireCommand = command.manage(scanner);
-                    System.out.println(list.manage(scanner));
                     System.out.printf("Sent %s command\n", entireCommand);
                     out.println(entireCommand);
                     System.out.println(in.readLine());
+                    list = new ListUsers();
+                    System.out.print(list.manage(scanner));
                     break;
                 case "logout":
                     System.out.println("Sending logout command");
@@ -112,7 +112,7 @@ public class TCPClient {
                     out.println(command.manage(scanner));
                     break;
                 case "show_members":
-                    System.out.println("Recevied show_members command");
+                    System.out.println("Received show_members command");
                     System.out.println("insert the project you want show members for");
                     command = new ShowMembers();
                     out.println(command.manage(scanner));
@@ -122,8 +122,32 @@ public class TCPClient {
                     System.out.print(memberList);
                     break;
                 case "list_projects":
+                    System.out.println("Received list_projects command");
                     command = new ListProjects();
                     out.println(command.manage(scanner));
+                    String result = in.readLine();
+                    result = result.replace("$", "\n");
+                    System.out.print(result);
+                    break;
+                case "show_cards":
+                    System.out.println("Received show_cards command");
+                    System.out.println("insert the project you want show cards for");
+                    command = new ShowCards();
+                    out.print(command.manage(scanner));
+
+                    String cardsList = in.readLine();
+                    cardsList = cardsList.replace("$", "\n");
+                    System.out.println(cardsList);
+                    break;
+                case "show_card":
+                    System.out.println("Received show_card command");
+                    System.out.println("insert the project name and the card name you want to know about");
+                    command = new ShowCard();
+                    out.println(command.manage(scanner));
+
+                    String cardInfo = in.readLine();
+                    cardInfo = cardInfo.replace("$", "\n");
+                    System.out.println(cardInfo);
                     break;
                 default:
                     System.out.println("Invalid command"+cmd);

@@ -3,6 +3,7 @@ package worth.server;
 import worth.MemberStatus;
 import worth.exceptions.MemberNotFoundException;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
@@ -91,6 +92,7 @@ public class ConnectionHandler implements Runnable{
                         out.println("SERVER: You must be logged in to create a project");
                     } else {
                         if(Database.getDatabase().containsUser(usernameCreator)) {
+                            Database.updateProjectList(usernameCreator, projectName);
                             Project project = new Project(projectName);
                             project.createDirectory(projectName);
                             project.addMember(usernameCreator);
@@ -134,6 +136,7 @@ public class ConnectionHandler implements Runnable{
                         if(p.isInMemberList(member.getUsername())) {
                             if (!p.isInMemberList(username)) {
                                 p.addMember(username);
+                                Database.updateProjectList(username, projectName);
                                 System.out.println("Member added");
                             } else {
                                 System.out.println("User already present in the project");
@@ -156,11 +159,31 @@ public class ConnectionHandler implements Runnable{
                     }
                     break;
                 case "show_cards":
+                    projectName = command[1];
 
+                    p = new Project(projectName);
+                    if(p.isInMemberList(member.getUsername())) {
+                        out.println(p.showCards());
+                    } else {
+                        System.out.println("No member in the project");
+                    }
                     break;
                 case "list_projects":
+                    StringBuilder output = new StringBuilder();
                     for(String s : member.projectList) {
-                        System.out.println(s);
+                        output.append(s).append("$");
+                    }
+                    out.println(output);
+                    break;
+                case "show_card":
+                    info = command[1].split(":");
+                    projectName = info[0];
+                    cardName = info[1];
+                    p = new Project(projectName);
+                    if(p.isInMemberList(member.getUsername())) {
+                        out.println(p.showCard(cardName));
+                    }else {
+                        System.out.println("No member in the project");
                     }
                     break;
                 default:

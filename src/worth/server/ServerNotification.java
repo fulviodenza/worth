@@ -29,8 +29,14 @@ public class ServerNotification extends RemoteObject implements ServerNotificati
     }
 
     public synchronized void unregister(ClientNotificationInterface client, String member) throws RemoteException {
-        clients.remove(client);
-        usersList.remove(member);
+        if(clients.contains(client)) {
+            clients.remove(client);
+            System.out.println("Client removed");
+        }
+        if(usersList.contains(member)) {
+            usersList.remove(member);
+            System.out.println("member removed");
+        }
         System.out.println("Client unregistered");
     }
 

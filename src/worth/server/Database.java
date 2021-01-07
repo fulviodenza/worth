@@ -68,6 +68,28 @@ public class Database {
         return database;
     }
 
+    public static synchronized ArrayList<String> getProjectList(String nickname) {
+        ArrayList<String> projectList = null;
+        try {
+            projectList = getUser(nickname).getProjectList();
+        } catch (MemberNotFoundException e) {
+            e.printStackTrace();
+        }
+        return projectList;
+    }
+
+    public static synchronized void updateProjectList(String nickname, String projectName) {
+        try {
+            if(db.containsKey(nickname)) {
+                getUser(nickname).addToProject(projectName);
+                BufferedWriter writer = Files.newBufferedWriter(dbFile, StandardCharsets.UTF_8);
+                writer.write(createGsonBuilder().toJson(db.values()));
+                writer.flush();
+            }
+        } catch (MemberNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static synchronized void updateMember(Member user) {
         try {
             if(!db.contains(user)) {
