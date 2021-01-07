@@ -183,6 +183,7 @@ public class ConnectionHandler implements Runnable{
                         out.println(p.showCard(cardName));
                     }else {
                         System.out.println("No member in the project");
+                        out.println("No member in the project");
                     }
                     break;
                 case "change_status":
@@ -192,7 +193,14 @@ public class ConnectionHandler implements Runnable{
                     String oldList = info[2];
                     String newList = info[3];
                     p = new Project(projectName);
-                    p.moveCard(cardName, oldList, newList);
+                    if(p.isInMemberList(member.getUsername())) {
+                        p.moveCard(cardName, oldList, newList);
+                        System.out.println("Card status changed");
+                        out.println("Card status changed");
+                    } else {
+                        System.out.println("Only members of the project can change card status");
+                        out.println("SERVER: Only members of the project can change card status");
+                    }
                     break;
                 default:
                     System.out.println("Command not available");

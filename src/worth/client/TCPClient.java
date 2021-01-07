@@ -157,6 +157,7 @@ public class TCPClient {
                     System.out.println("insert the project name, the card name");
                     command = new ChangeStatus();
                     out.println(command.manage(scanner));
+                    in.readLine();
                     break;
                 default:
                     System.out.println("Invalid command"+cmd);
