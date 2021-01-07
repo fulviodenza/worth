@@ -3,7 +3,6 @@ package worth.server;
 import worth.MemberStatus;
 import worth.exceptions.MemberNotFoundException;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
@@ -185,6 +184,15 @@ public class ConnectionHandler implements Runnable{
                     }else {
                         System.out.println("No member in the project");
                     }
+                    break;
+                case "change_status":
+                    info = command[1].split(":");
+                    projectName = info[0];
+                    cardName = info[1];
+                    String oldList = info[2];
+                    String newList = info[3];
+                    p = new Project(projectName);
+                    p.moveCard(cardName, oldList, newList);
                     break;
                 default:
                     System.out.println("Command not available");

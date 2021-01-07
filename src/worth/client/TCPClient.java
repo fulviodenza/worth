@@ -1,16 +1,13 @@
 package worth.client;
 
-import worth.server.ServerNotification;
 import worth.server.ServerNotificationInterface;
 
 import java.io.*;
 import java.net.Socket;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -148,6 +145,18 @@ public class TCPClient {
                     String cardInfo = in.readLine();
                     cardInfo = cardInfo.replace("$", "\n");
                     System.out.println(cardInfo);
+                    break;
+                case "get_card_history":
+                    System.out.println("Received get_card_history command");
+                    System.out.println("insert the project name and the card name you want to know the history about");
+                    command = new GetCardHistory();
+                    out.println(command.manage(scanner));
+                    break;
+                case "change_status":
+                    System.out.println("Received change status command");
+                    System.out.println("insert the project name, the card name");
+                    command = new ChangeStatus();
+                    out.println(command.manage(scanner));
                     break;
                 default:
                     System.out.println("Invalid command"+cmd);

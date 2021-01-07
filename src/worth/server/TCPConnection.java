@@ -1,18 +1,12 @@
 package worth.server;
 
-import worth.client.TCPClient;
-
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class TCPConnection {
 
     private ServerSocket serverSocket;
-    private Socket clientSocket;
     private ServerNotification serverNotification;
 
     public TCPConnection(ServerNotification serverNotification) {

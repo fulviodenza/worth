@@ -3,9 +3,7 @@ package worth.server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import worth.exceptions.MemberNotFoundException;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -101,19 +99,6 @@ public class Project {
         }
     }
 
-    public void updateTODOList() {
-        Writer writer;
-        try {
-            writer = new FileWriter(path+"/todo_list.json");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(TODO_List, writer);
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void readCardList() {
         Gson gson = new Gson();
         BufferedReader br;
@@ -140,6 +125,9 @@ public class Project {
             }
         }
         readCardList();
+        for(Card c : taskList) {
+            System.out.println(c.getName());
+        }
         //By default a card is added to TODO_LIST
         Card newCard = new Card(cardName, cardDescription);
         taskList.add(newCard);
@@ -199,11 +187,109 @@ public class Project {
         return output.toString();
     }
 
-    public synchronized void addTodoList(Card c) {
-        if(!TODO_List.contains(c)) {
-            TODO_List.add(c);
-        } else {
-            System.out.println("Card already exists");
+    public synchronized void moveCard(String cardName, String oldStatus, String newStatus) {
+        Card card = null;
+        boolean found = false;
+        if(oldStatus.equals("todo") && newStatus.equals("in_progress")) {
+            readTodoList();
+            for(Card c : TODO_List) {
+                if(c.getName().equals(cardName)) {
+                    card = c;
+                    found = true;
+                    break;
+                }
+            }
+            if(found) {
+                TODO_List.remove(card);
+                writeTodoList();
+                readInProgressList();
+                IN_PROGRESS_List.add(card);
+                card.setStatus(CardStatus.IN_PROGRESS);
+                writeInProgressList();
+                System.out.println("MOVED");
+            } else {
+                System.out.println("Card not found in TODO list");
+            }
+        } else if(oldStatus.equals("in_progress") && newStatus.equals("to_be_revised")) {
+            readInProgressList();
+            for(Card c : IN_PROGRESS_List) {
+                if(c.getName().equals(cardName)) {
+                    card = c;
+                    found = true;
+                    break;
+                }
+            }
+            if(found) {
+                IN_PROGRESS_List.remove(card);
+                writeInProgressList();
+                readToBeRevisedList();
+                TO_BE_REVISED_List.add(card);
+                card.setStatus(CardStatus.TO_BE_REVISED);
+                writeToBeRevisedList();
+                System.out.println("MOVED");
+            } else {
+                System.out.println("Card not found in IN_PROGRESS list");
+            }
+        } else if(oldStatus.equals("to_be_revised") && newStatus.equals("in_progress")) {
+            readToBeRevisedList();
+            for(Card c : TO_BE_REVISED_List) {
+                if(c.getName().equals(cardName)) {
+                    card = c;
+                    found = true;
+                    break;
+                }
+            }
+            if(found) {
+                TO_BE_REVISED_List.remove(card);
+                writeToBeRevisedList();
+                readInProgressList();
+                IN_PROGRESS_List.add(card);
+                card.setStatus(CardStatus.IN_PROGRESS);
+                writeInProgressList();
+                System.out.println("MOVED");
+            } else {
+                System.out.println("Card not found in IN_PROGRESS list");
+            }
+        } else if(oldStatus.equals("in_progress") && newStatus.equals("done")) {
+            readInProgressList();
+            for(Card c : IN_PROGRESS_List) {
+                if(c.getName().equals(cardName)) {
+                    card = c;
+                    found = true;
+                    break;
+                }
+            }
+            if(found) {
+                IN_PROGRESS_List.remove(card);
+                writeInProgressList();
+                readDoneList();
+                DONE_List.add(card);
+                card.setStatus(CardStatus.DONE);
+                writeDoneList();
+                System.out.println("MOVED");
+            } else {
+                System.out.println("Card not found in IN_PROGRESS list");
+            }
+        } else if(oldStatus.equals("to_be_revised") && newStatus.equals("done")) {
+            readToBeRevisedList();
+            for(Card c : TO_BE_REVISED_List) {
+                if(c.getName().equals(cardName)) {
+                    card = c;
+                    found = true;
+                    break;
+                }
+            }
+            if(found) {
+                TO_BE_REVISED_List.remove(card);
+                writeToBeRevisedList();
+                readDoneList();
+                DONE_List.add(card);
+                card.setStatus(CardStatus.DONE);
+                writeDoneList();
+                System.out.println("MOVED");
+            } else {
+                System.out.println("Card not found in IN_PROGRESS list");
+            }
         }
     }
 
@@ -233,11 +319,81 @@ public class Project {
         }
     }
 
-//    public int moveCard(Card card, CardStatus status) {
-//        if(taskList.contains(card)) {
-//            card.changeStatus(status);
-//            return 0;
-//        }
-//        return 1;
-//    }
+    public synchronized void readInProgressList() {
+        Gson gson = new Gson();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(path+"/in_progress_list.json"));
+            Type type = new TypeToken<ArrayList<Card>>() {
+            }.getType();
+            IN_PROGRESS_List = gson.fromJson(br, type);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public synchronized void writeInProgressList() {
+        Writer writer;
+        try {
+            writer = new FileWriter(path+"/in_progress_list.json");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(IN_PROGRESS_List, writer);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public synchronized void readToBeRevisedList() {
+        Gson gson = new Gson();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(path+"/to_be_revised_list.json"));
+            Type type = new TypeToken<ArrayList<Card>>() {
+            }.getType();
+            TO_BE_REVISED_List = gson.fromJson(br, type);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public synchronized void writeToBeRevisedList() {
+        Writer writer;
+        try {
+            writer = new FileWriter(path+"/to_be_revised_list.json");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(TO_BE_REVISED_List, writer);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public synchronized void readDoneList() {
+        Gson gson = new Gson();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(path+"/done.json"));
+            Type type = new TypeToken<ArrayList<Card>>() {
+            }.getType();
+            DONE_List = gson.fromJson(br, type);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public synchronized void writeDoneList() {
+        Writer writer;
+        try {
+            writer = new FileWriter(path+"/done.json");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(DONE_List, writer);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

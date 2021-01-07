@@ -7,11 +7,15 @@
   {
     "username": "paola",
     "password": "esposito",
-    "projectList": []
+    "projectList": [
+      "insalata"
+    ]
   },
   {
     "username": "fulvio",
     "password": "denza",
-    "projectList": []
+    "projectList": [
+      "insalata"
+    ]
   }
 ]

@@ -2,22 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7abeedda-afe0-4b7b-9e64-1a31590a00b0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/projects/insalata/cards.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/insalata/in_progress_list.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/insalata/memberList.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/insalata/to_be_revised_list.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/insalata/todo_list.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/database.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/insalata/memberList.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/insalata/todo_list.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/scaloppine/cards.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/scaloppine/memberList.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/scaloppine/todo_list.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/users.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/client/CLICommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/CLICommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/ClientNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/ClientNotification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/client/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/TCPClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/ServerNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ServerNotification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +38,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1mDK1aoLdpoCjI7mm5Kq31iAqRM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -67,6 +78,21 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -85,7 +111,7 @@
       <workItem from="1609599114573" duration="3526000" />
       <workItem from="1609688330785" duration="1849000" />
       <workItem from="1609838487197" duration="50924000" />
-      <workItem from="1610009798248" duration="7514000" />
+      <workItem from="1610009798248" duration="16240000" />
     </task>
     <servers />
   </component>

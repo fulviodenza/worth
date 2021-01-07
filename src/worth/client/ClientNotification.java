@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.RemoteObject;
-import java.util.logging.FileHandler;
 
 public class ClientNotification extends RemoteObject implements ClientNotificationInterface {
 

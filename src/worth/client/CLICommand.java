@@ -193,3 +193,30 @@ class ShowCard extends CLICommand {
         return "show_card@"+projectName+":"+cardName;
     }
 }
+
+class GetCardHistory extends CLICommand {
+    protected GetCardHistory() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+        String cardName = scanner.next();
+        System.out.println("Sending command get_card_history@"+projectName+":"+cardName);
+        return "get_card_history@"+projectName+":"+cardName;
+    }
+}
+
+class ChangeStatus extends CLICommand {
+    protected ChangeStatus() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+        String cardName = scanner.next();
+        String startingList = scanner.next();
+        String endingList = scanner.next();
+
+        System.out.println("Sending command change_status@"+projectName+":"+cardName+":"+startingList+":"+endingList);
+        return "change_status@"+projectName+":"+cardName+":"+startingList+":"+endingList;
+    }
+}

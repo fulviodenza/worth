@@ -5,7 +5,6 @@ import com.google.gson.*;
 import worth.MemberStatus;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Member {
 
@@ -36,14 +35,6 @@ public class Member {
         projectList.add(projectName);
 
         return 0;
-    }
-
-    public boolean isInProject(String projectName) {
-        if(projectList.contains(projectName)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public ArrayList<String> getProjectList() {
