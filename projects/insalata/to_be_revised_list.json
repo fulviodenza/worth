@@ -1,7 +1,12 @@
 [
   {
-    "name": "olio",
-    "description": "oleoso",
-    "status": "TO_BE_REVISED"
+    "name": "carota",
+    "description": "lim",
+    "status": "TO_BE_REVISED",
+    "cardHistory": [
+      "todo",
+      "in_progress",
+      "to_be_revised"
+    ]
   }
 ]

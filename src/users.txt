@@ -1,3 +1,2 @@
-luiggi:OFFLINE
 paola:OFFLINE
 fulvio:ONLINE

@@ -102,12 +102,17 @@ public class Project {
     public void readCardList() {
         Gson gson = new Gson();
         BufferedReader br;
+
         try {
+            File f = new File(path+"/cards.json");
+            if(!f.exists()) {
+                f.createNewFile();
+            }
             br = new BufferedReader(new FileReader(path+"/cards.json"));
             Type type = new TypeToken<ArrayList<Card>>() {
             }.getType();
             taskList = gson.fromJson(br, type);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -124,7 +129,7 @@ public class Project {
                 System.out.println("The task is already in the Card list");
             }
         }
-        readCardList();
+//        readCardList();
         for(Card c : taskList) {
             System.out.println(c.getName());
         }
@@ -188,6 +193,7 @@ public class Project {
     }
 
     public synchronized void moveCard(String cardName, String oldStatus, String newStatus) {
+        readCardList();
         Card card = null;
         boolean found = false;
         if(oldStatus.equals("todo") && newStatus.equals("in_progress")) {
@@ -200,12 +206,17 @@ public class Project {
                 }
             }
             if(found) {
+
+                taskList.get(taskList.indexOf(card)).addToCardHistory("in_progress");
                 TODO_List.remove(card);
                 writeTodoList();
                 readInProgressList();
                 IN_PROGRESS_List.add(card);
+                card.addToCardHistory("in_progress");
                 card.setStatus(CardStatus.IN_PROGRESS);
+
                 writeInProgressList();
+                updateCardList();
                 System.out.println("MOVED");
             } else {
                 System.out.println("Card not found in TODO list");
@@ -220,12 +231,15 @@ public class Project {
                 }
             }
             if(found) {
+                readCardList();
                 IN_PROGRESS_List.remove(card);
                 writeInProgressList();
                 readToBeRevisedList();
                 TO_BE_REVISED_List.add(card);
+                card.addToCardHistory("to_be_revised");
                 card.setStatus(CardStatus.TO_BE_REVISED);
                 writeToBeRevisedList();
+                updateCardList();
                 System.out.println("MOVED");
             } else {
                 System.out.println("Card not found in IN_PROGRESS list");
@@ -240,12 +254,15 @@ public class Project {
                 }
             }
             if(found) {
+                readCardList();
                 TO_BE_REVISED_List.remove(card);
                 writeToBeRevisedList();
                 readInProgressList();
                 IN_PROGRESS_List.add(card);
+                card.addToCardHistory("in_progress");
                 card.setStatus(CardStatus.IN_PROGRESS);
                 writeInProgressList();
+                updateCardList();
                 System.out.println("MOVED");
             } else {
                 System.out.println("Card not found in IN_PROGRESS list");
@@ -260,12 +277,15 @@ public class Project {
                 }
             }
             if(found) {
+                readCardList();
                 IN_PROGRESS_List.remove(card);
                 writeInProgressList();
                 readDoneList();
                 DONE_List.add(card);
+                card.addToCardHistory("done");
                 card.setStatus(CardStatus.DONE);
                 writeDoneList();
+                updateCardList();
                 System.out.println("MOVED");
             } else {
                 System.out.println("Card not found in IN_PROGRESS list");
@@ -280,12 +300,15 @@ public class Project {
                 }
             }
             if(found) {
+                readCardList();
                 TO_BE_REVISED_List.remove(card);
                 writeToBeRevisedList();
                 readDoneList();
                 DONE_List.add(card);
+                card.addToCardHistory("done");
                 card.setStatus(CardStatus.DONE);
                 writeDoneList();
+                updateCardList();
                 System.out.println("MOVED");
             } else {
                 System.out.println("Card not found in IN_PROGRESS list");

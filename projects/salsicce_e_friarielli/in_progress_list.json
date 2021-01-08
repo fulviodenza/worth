@@ -1,0 +1,11 @@
+[
+  {
+    "name": "salsicce",
+    "description": "sals",
+    "status": "IN_PROGRESS",
+    "cardHistory": [
+      "todo",
+      "in_progress"
+    ]
+  }
+]

@@ -1,21 +1,30 @@
 [
   {
-    "username": "luiggi",
-    "password": "gesuele",
-    "projectList": []
-  },
-  {
     "username": "paola",
     "password": "esposito",
-    "projectList": [
-      "insalata"
-    ]
+    "projectList": []
   },
   {
     "username": "fulvio",
     "password": "denza",
     "projectList": [
-      "insalata"
+      "insalata",
+      "salsicce_e_friarielli",
+      "ciao",
+      "chiavi",
+      "panda",
+      "diocane",
+      "tazzina",
+      "madonnalaida",
+      "sigaretta",
+      "giradischi",
+      "pompa",
+      "thinkpad",
+      "mindfuck",
+      "kebab",
+      "pesce",
+      "pizza",
+      "xiaomi"
     ]
   }
 ]

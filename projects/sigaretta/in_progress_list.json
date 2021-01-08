@@ -1,0 +1,11 @@
+[
+  {
+    "name": "tabacco",
+    "description": "cancro",
+    "status": "IN_PROGRESS",
+    "cardHistory": [
+      "todo",
+      "in_progress"
+    ]
+  }
+]
