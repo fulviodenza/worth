@@ -45,6 +45,10 @@ public class Card {
         this.status = status;
     }
 
+    public ArrayList<String> getCardHistory() {
+        return cardHistory;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

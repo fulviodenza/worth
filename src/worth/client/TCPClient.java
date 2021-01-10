@@ -151,6 +151,8 @@ public class TCPClient {
                     System.out.println("insert the project name and the card name you want to know the history about");
                     command = new GetCardHistory();
                     out.println(command.manage(scanner));
+                    String cardInfoHistory = in.readLine().replace(":", "\n");
+                    System.out.print(cardInfoHistory);
                     break;
                 case "change_status":
                     System.out.println("Received change status command");

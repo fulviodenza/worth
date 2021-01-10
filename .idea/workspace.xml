@@ -2,68 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7abeedda-afe0-4b7b-9e64-1a31590a00b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/projects/chiavi/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/chiavi/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/chiavi/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/ciao/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/ciao/in_progress_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/ciao/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/ciao/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/diocane/card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/diocane/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/diocane/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/diocane/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/giradischi/card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/giradischi/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/giradischi/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/giradischi/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/kebab/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/kebab/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/kebab/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/madonnalaida/card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/madonnalaida/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/madonnalaida/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/madonnalaida/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/mindfuck/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/mindfuck/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/panda/card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/panda/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/panda/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/panda/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pesce/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pesce/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pesce/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pizza/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pizza/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pizza/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pompa/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pompa/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sigaretta/card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sigaretta/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sigaretta/in_progress_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sigaretta/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sigaretta/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/tazzina/card.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/tazzina/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/tazzina/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/tazzina/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/thinkpad/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/thinkpad/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/thinkpad/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/xiaomi/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/xiaomi/in_progress_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/xiaomi/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/xiaomi/todo_list.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/insalata/cards.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/insalata/in_progress_list.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/insalata/memberList.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/insalata/todo_list.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/scaloppine/memberList.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/tablet/cards.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/tablet/in_progress_list.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/tablet/memberList.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/tablet/to_be_revised_list.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/tablet/todo_list.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/database.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/insalata/cards.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/insalata/cards.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/insalata/memberList.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/insalata/memberList.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/insalata/to_be_revised_list.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/insalata/to_be_revised_list.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/TCPClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worth.iml" beforeDir="false" afterPath="$PROJECT_DIR$/worth.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,6 +97,7 @@
       <workItem from="1610009798248" duration="17818000" />
       <workItem from="1610066236490" duration="625000" />
       <workItem from="1610121730063" duration="3542000" />
+      <workItem from="1610270484276" duration="2365000" />
     </task>
     <servers />
   </component>

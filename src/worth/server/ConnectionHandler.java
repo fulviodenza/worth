@@ -202,6 +202,18 @@ public class ConnectionHandler implements Runnable{
                         out.println("SERVER: Only members of the project can change card status");
                     }
                     break;
+                case "get_card_history":
+                    info = command[1].split(":");
+                    projectName = info[0];
+                    cardName = info[1];
+                    String outputHistory = null;
+
+                    p = new Project(projectName);
+                    if(p.isInMemberList(member.getUsername())) {
+                        outputHistory = p.cardHistory(cardName);
+                    }
+                    out.println(outputHistory);
+                    break;
                 default:
                     System.out.println("Command not available");
                     out.println("SERVER: Command not available");

@@ -222,6 +222,7 @@ public class Project {
                 System.out.println("Card not found in TODO list");
             }
         } else if(oldStatus.equals("in_progress") && newStatus.equals("to_be_revised")) {
+            readCardList();
             readInProgressList();
             for(Card c : IN_PROGRESS_List) {
                 if(c.getName().equals(cardName)) {
@@ -231,7 +232,7 @@ public class Project {
                 }
             }
             if(found) {
-                readCardList();
+                taskList.get(taskList.indexOf(card)).addToCardHistory("to_be_revised");
                 IN_PROGRESS_List.remove(card);
                 writeInProgressList();
                 readToBeRevisedList();
@@ -245,6 +246,7 @@ public class Project {
                 System.out.println("Card not found in IN_PROGRESS list");
             }
         } else if(oldStatus.equals("to_be_revised") && newStatus.equals("in_progress")) {
+            readCardList();
             readToBeRevisedList();
             for(Card c : TO_BE_REVISED_List) {
                 if(c.getName().equals(cardName)) {
@@ -254,7 +256,7 @@ public class Project {
                 }
             }
             if(found) {
-                readCardList();
+                taskList.get(taskList.indexOf(card)).addToCardHistory("in_progress");
                 TO_BE_REVISED_List.remove(card);
                 writeToBeRevisedList();
                 readInProgressList();
@@ -268,6 +270,7 @@ public class Project {
                 System.out.println("Card not found in IN_PROGRESS list");
             }
         } else if(oldStatus.equals("in_progress") && newStatus.equals("done")) {
+            readCardList();
             readInProgressList();
             for(Card c : IN_PROGRESS_List) {
                 if(c.getName().equals(cardName)) {
@@ -277,7 +280,7 @@ public class Project {
                 }
             }
             if(found) {
-                readCardList();
+                taskList.get(taskList.indexOf(card)).addToCardHistory("done");
                 IN_PROGRESS_List.remove(card);
                 writeInProgressList();
                 readDoneList();
@@ -291,6 +294,7 @@ public class Project {
                 System.out.println("Card not found in IN_PROGRESS list");
             }
         } else if(oldStatus.equals("to_be_revised") && newStatus.equals("done")) {
+            readCardList();
             readToBeRevisedList();
             for(Card c : TO_BE_REVISED_List) {
                 if(c.getName().equals(cardName)) {
@@ -300,7 +304,7 @@ public class Project {
                 }
             }
             if(found) {
-                readCardList();
+                taskList.get(taskList.indexOf(card)).addToCardHistory("done");
                 TO_BE_REVISED_List.remove(card);
                 writeToBeRevisedList();
                 readDoneList();
@@ -314,6 +318,33 @@ public class Project {
                 System.out.println("Card not found in IN_PROGRESS list");
             }
         }
+    }
+
+    public synchronized String cardHistory(String card) {
+        readCardList();
+        boolean found = false;
+        int index = 0;
+
+        StringBuilder output = new StringBuilder();
+
+        for(Card c : taskList) {
+            if (c.getName().equals(card)) {
+                found = true;
+                index = taskList.indexOf(c);
+                break;
+            }
+        }
+
+        if(found) {
+            for(String s : taskList.get(index).getCardHistory()){
+                output.append(s).append(":");
+            }
+        } else {
+            output.append("No card found");
+        }
+
+        return output.toString();
+
     }
 
     public synchronized void readTodoList() {
