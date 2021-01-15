@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7abeedda-afe0-4b7b-9e64-1a31590a00b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/worth/client/UDPConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/chromium/ip_address.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/chromium/memberList.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/pollo/ip_address.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/pollo/memberList.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/worth/client/UDPServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/worth/server/IPGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/CLICommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/CLICommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/TCPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/UDPConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/UDPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Project.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +74,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="worth.client" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
@@ -96,7 +114,7 @@
       <workItem from="1610066236490" duration="625000" />
       <workItem from="1610121730063" duration="3542000" />
       <workItem from="1610270484276" duration="3612000" />
-      <workItem from="1610290629666" duration="2765000" />
+      <workItem from="1610290629666" duration="36187000" />
     </task>
     <servers />
   </component>

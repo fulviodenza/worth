@@ -1,1 +1,3 @@
+valerio:ONLINE
+paola:OFFLINE
 fulvio:ONLINE

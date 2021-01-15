@@ -161,6 +161,25 @@ public class TCPClient {
                     out.println(command.manage(scanner));
                     in.readLine();
                     break;
+                case "send":
+                    System.out.println("Received send command");
+                    System.out.println("insert the project name, the message");
+                    command = new Send();
+                    out.println(command.manage(scanner));
+                    String resultChat = in.readLine();
+                    String[] data = resultChat.split(":", 2);
+                    if(data[0].contains("success")) {
+                        UDPServer.send(data[2], data[1]);
+                    }
+                    break;
+                case "read":
+                    System.out.println("Received read command");
+                    System.out.println("insert the project name");
+                    command = new Read();
+                    out.println(command.manage(scanner));
+                    String[] info = in.readLine().split(":");
+                    startChat(info[1], info[0]);
+                    break;
                 default:
                     System.out.println("Invalid command"+cmd);
             }
@@ -168,4 +187,27 @@ public class TCPClient {
             e.printStackTrace();
         }
     }
+
+    private String readChat(String projectName) throws IOException {
+        out.println("read@"+projectName);
+        String[] input = in.readLine().split(":");
+        String ip = input[1];
+        System.out.println(ip);
+        System.out.println(ip);
+        return ip;
+    }
+
+    Thread chat;
+
+    public void startChat(String ip, String projectName) throws IOException {
+        UDPClient client = new UDPClient(readChat(projectName));
+        chat = new Thread(client);
+        chat.start();
+    }
+
+    private void stopChat() {
+        if (chat != null)
+            chat.interrupt();
+    }
+
 }

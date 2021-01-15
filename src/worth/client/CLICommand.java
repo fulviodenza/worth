@@ -220,3 +220,28 @@ class ChangeStatus extends CLICommand {
         return "change_status@"+projectName+":"+cardName+":"+startingList+":"+endingList;
     }
 }
+
+class Send extends CLICommand {
+    protected Send() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+        String message = scanner.nextLine();
+
+        System.out.println("Sending command send@"+projectName+":"+message);
+        return "send@"+projectName+":"+message;
+    }
+}
+
+class Read extends CLICommand {
+    protected Read() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+
+        System.out.println("Sending command read@"+projectName);
+        return "read@"+projectName;
+    }
+}

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Member {
 
+    private int indexMessageQueue;
     private String username;
     private String password;
     private MemberStatus status;
@@ -18,6 +19,14 @@ public class Member {
         this.password = password;
         this.status = MemberStatus.OFFLINE;
         projectList = new ArrayList<>();
+    }
+
+    public int getIndexMessageQueue() {
+        return indexMessageQueue;
+    }
+
+    public void setIndexMessageQueue(int indexMessageQueue) {
+        this.indexMessageQueue = indexMessageQueue;
     }
 
     public Member(String username, String password, ArrayList<String> projectList) {

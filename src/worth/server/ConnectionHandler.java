@@ -4,7 +4,9 @@ import worth.MemberStatus;
 import worth.exceptions.MemberNotFoundException;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
@@ -213,6 +215,37 @@ public class ConnectionHandler implements Runnable{
                         outputHistory = p.cardHistory(cardName);
                     }
                     out.println(outputHistory);
+                    break;
+                case "send":
+                    System.out.println("Received send command");
+                    if(logged) {
+                        info = command[1].split(":");
+                        projectName = info[0];
+                        String msg = info[1];
+
+                        p = new Project(projectName);
+
+                        if (p.isInMemberList(member.getUsername())) {
+                            out.println("success:"+p.getIpAddress()+":"+msg);
+                        } else {
+                            throw new MemberNotFoundException();
+                        }
+                    }
+                    break;
+                case "read":
+                    System.out.println("Received read command");
+                    projectName = command[1]; //read@projectName
+                    System.out.println(command[1]);
+
+                    p = new Project(projectName);
+
+                    if(logged) {
+                        if(Database.containsUser(member.getUsername())) {
+                            if(p.isInMemberList(member.getUsername())) {
+                                out.println(projectName+":"+p.getIpAddress());
+                            }
+                        }
+                    }
                     break;
                 default:
                     System.out.println("Command not available");

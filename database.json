@@ -1,0 +1,25 @@
+[
+  {
+    "username": "valerio",
+    "password": "besozzi",
+    "projectList": [
+      "chromium",
+      "youtube_dl"
+    ]
+  },
+  {
+    "username": "paola",
+    "password": "esposito",
+    "projectList": []
+  },
+  {
+    "username": "fulvio",
+    "password": "denza",
+    "projectList": [
+      "fisica",
+      "pollo",
+      "chromium",
+      "youtube_dl"
+    ]
+  }
+]

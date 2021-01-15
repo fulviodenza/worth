@@ -3,6 +3,8 @@ package worth.server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import worth.client.UDPServer;
+import worth.exceptions.MemberNotFoundException;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -10,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Project {
 
@@ -20,20 +23,25 @@ public class Project {
     public ArrayList<Card> IN_PROGRESS_List;
     public ArrayList<Card> TO_BE_REVISED_List;
     public ArrayList<Card> DONE_List;
+    public List<String> messageQueue;
+
     Path path;
     String pathString;
+    String ipAddress;
 
     public Project(String projectName) {
 
         this.projectName = projectName;
         memberList = new ArrayList<>();
         taskList = new ArrayList<>();
+        ipAddress = IPGenerator.generateIPAddress();
 
         //Init of various lists
         TODO_List = new ArrayList<>();
         IN_PROGRESS_List = new ArrayList<>();
         TO_BE_REVISED_List = new ArrayList<>();
         DONE_List = new ArrayList<>();
+        messageQueue = new ArrayList<>();
 
         //Creation of a file for each list
         File todo = new File(path+"todo_list.json");
@@ -48,16 +56,64 @@ public class Project {
     //CREAZIONE PROGETTO
     public void createDirectory(String projectName) {
         try {
-            if(Files.exists(Path.of("../projects/" + projectName + "/"))){
+            if(Files.exists(path)){
                 System.out.println("Project exists in the project folder");
             } else {
+                Writer writer;
                 Files.createDirectories(path);
-                pathString = path.toString();
+                String pathIP = path+"/ip_address.json";
+                Files.createFile(Path.of(pathIP));
                 System.out.println("Project created");
+                writer = new FileWriter(pathIP);
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                gson.toJson(ipAddress, writer);
+                writer.flush();
+                writer.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getIpAddress() {
+        Gson gson = new Gson();
+        BufferedReader br;
+
+        try {
+            File f = new File(path+"/ip_address.json");
+            if(!f.exists()) {
+                f.createNewFile();
+            }
+            br = new BufferedReader(new FileReader(path+"/ip_address.json"));
+            Type type = new TypeToken<String>() {
+            }.getType();
+            ipAddress = gson.fromJson(br, type);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ipAddress;
+    }
+
+    public void getRemainingMessages(String username) {
+
+        Member m = null;
+        try {
+            m = Database.getUser(username);
+        } catch (MemberNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        assert m != null;
+        for (int i = m.getIndexMessageQueue(); i < messageQueue.size(); i++) {
+
+            UDPServer.send(messageQueue.get(i), ipAddress);
+        }
+
+        m.setIndexMessageQueue(messageQueue.size()-1);
+    }
+
+    public void sendMessage(String username, String message) {
+        messageQueue.add(username+message);
     }
 
     //METODI PER AGGIUNTA MEMBRO AL PROGETTO
@@ -75,6 +131,7 @@ public class Project {
         Gson gson = new Gson();
         BufferedReader br;
         try {
+            System.out.println(path.toString());
             br = new BufferedReader(new FileReader(path+"/memberList.json"));
             Type type = new TypeToken<ArrayList<String>>() {
             }.getType();
