@@ -63,24 +63,34 @@ public class TCPClient {
                     }
                     break;
                 case "login":
-                    //this.startConnection();
                     System.out.println("Sending login command");
                     command = new LoginHandler();
                     entireCommand = command.manage(scanner);
-                    System.out.printf("Sent %s command\n", entireCommand);
-                    out.println(entireCommand);
-                    System.out.println(in.readLine());
-                    list = new ListUsers();
-                    System.out.print(list.manage(scanner));
+                    if(!entireCommand.equals("fail")) {
+                        System.out.printf("Sent %s command\n", entireCommand);
+                        out.println(entireCommand);
+                        String result = in.readLine();
+                        System.out.println(result);
+                        if(result.contains("[OK]")) {
+                            list = new ListUsers();
+                            System.out.print(list.manage(scanner));
+                        }
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "logout":
                     System.out.println("Sending logout command");
                     System.out.println("write your username");
                     command = new LogoutHandler();
                     entireCommand = command.manage(scanner);
-                    System.out.printf("Sent %s command\n", entireCommand);
-                    out.println(entireCommand);
-                    System.out.println(in.readLine());
+                    if(!entireCommand.equals("fail")) {
+                        System.out.printf("Sent %s command\n", entireCommand);
+                        out.println(entireCommand);
+                        System.out.println(in.readLine());
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "list_users":
                     list = new ListUsers();
@@ -94,95 +104,154 @@ public class TCPClient {
                     System.out.println("Received create_project command");
                     System.out.println("insert the project name");
                     command = new CreateProject();
-                    out.println(command.manage(scanner));
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "add_card":
                     System.out.println("Received add_card command");
                     System.out.println("insert the project name, the card name and the description");
                     command = new CreateCard();
-                    out.println(command.manage(scanner));
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                        String result = in.readLine(); //message+username
+                        String[] info = result.split(":");
+                        UDPServer.send(info[0], info[1], info[2]);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "add_member":
                     System.out.println("Received add_member command");
                     System.out.println("insert the project name and the username you want to add to project");
                     command = new AddUser();
-                    out.println(command.manage(scanner));
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "show_members":
                     System.out.println("Received show_members command");
                     System.out.println("insert the project you want show members for");
                     command = new ShowMembers();
-                    out.println(command.manage(scanner));
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
 
-                    String memberList = in.readLine();
-                    memberList = memberList.replace("$", "\n");
-                    System.out.print(memberList);
+                        String memberList = in.readLine();
+                        memberList = memberList.replace("$", "\n");
+                        System.out.print(memberList);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "list_projects":
                     System.out.println("Received list_projects command");
                     command = new ListProjects();
-                    out.println(command.manage(scanner));
-                    String result = in.readLine();
-                    result = result.replace("$", "\n");
-                    System.out.print(result);
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                        String result = in.readLine();
+                        result = result.replace("$", "\n");
+                        System.out.print(result);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "show_cards":
                     System.out.println("Received show_cards command");
                     System.out.println("insert the project you want show cards for");
                     command = new ShowCards();
-                    out.print(command.manage(scanner));
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.print(entireCommand);
 
-                    String cardsList = in.readLine();
-                    cardsList = cardsList.replace("$", "\n");
-                    System.out.println(cardsList);
+                        String cardsList = in.readLine();
+                        cardsList = cardsList.replace("$", "\n");
+                        System.out.println(cardsList);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "show_card":
                     System.out.println("Received show_card command");
                     System.out.println("insert the project name and the card name you want to know about");
                     command = new ShowCard();
-                    out.println(command.manage(scanner));
-
-                    String cardInfo = in.readLine();
-                    cardInfo = cardInfo.replace("$", "\n");
-                    System.out.println(cardInfo);
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                        String cardInfo = in.readLine();
+                        cardInfo = cardInfo.replace("$", "\n");
+                        System.out.println(cardInfo);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "get_card_history":
                     System.out.println("Received get_card_history command");
                     System.out.println("insert the project name and the card name you want to know the history about");
                     command = new GetCardHistory();
-                    out.println(command.manage(scanner));
-                    String cardInfoHistory = in.readLine().replace(":", "\n");
-                    System.out.print(cardInfoHistory);
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                        String cardInfoHistory = in.readLine().replace(":", "\n");
+                        System.out.print(cardInfoHistory);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "change_status":
                     System.out.println("Received change status command");
                     System.out.println("insert the project name, the card name");
                     command = new ChangeStatus();
-                    out.println(command.manage(scanner));
-                    in.readLine();
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                        String result = in.readLine(); //message+username
+                        String[] info = result.split(":");
+                        UDPServer.send(info[0], info[1], info[2]);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 case "send":
                     System.out.println("Received send command");
                     System.out.println("insert the project name, the message");
                     command = new Send();
-                    out.println(command.manage(scanner));
-                    String resultChat = in.readLine();
-                    System.out.println(resultChat);
-                    String[] data = resultChat.split(":");
-                    if(data[0].contains("success")) {
-                        UDPServer.send(data[2], data[1]);
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                        String resultChat = in.readLine();
+                        System.out.println(resultChat);
+                        String[] data = resultChat.split(":");
+                        if (data[0].contains("success")) {
+                            UDPServer.send(data[2], data[1], data[3]);
+                        }
+                    } else {
+                        System.out.println("Character : or @ not allowed");
                     }
                     break;
                 case "read":
                     System.out.println("Received read command");
                     System.out.println("insert the project name");
                     command = new Read();
-                    out.println(command.manage(scanner));
-                    String[] info = in.readLine().split(":");
-                    startChat(info[1], info[0]);
+                    entireCommand = command.manage(scanner);
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                        String[] info = in.readLine().split(":");
+                        startChat(info[1], info[0]);
+                    } else {
+                        System.out.println("Character : or @ not allowed");
+                    }
                     break;
                 default:
-                    System.out.println("Invalid command"+cmd);
+                    System.out.println("Invalid command "+cmd);
             }
         } catch (NoSuchElementException | IOException | NotBoundException e) {
             e.printStackTrace();

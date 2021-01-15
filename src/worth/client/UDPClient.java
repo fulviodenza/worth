@@ -14,28 +14,25 @@ public class UDPClient implements Runnable{
     private void receive() {
         byte[] buffer = new byte[1024];
         try {
-            System.out.println("IP è:" + ip);
             InetAddress group = InetAddress.getByName(ip);
             MulticastSocket ms = new MulticastSocket(20005);
             ms.joinGroup(group);
-            System.out.println("sono qui fuori dal ciclo");
+            System.out.print("\n");
             while(!Thread.currentThread().isInterrupted()) {
                 DatagramPacket dp = new DatagramPacket(buffer, buffer.length);
                 ms.receive(dp);
                 String message = new String(dp.getData(), dp.getOffset(), dp.getLength());
-                System.out.println("Sono qui");
-                System.out.print(">> " + message + "\n");
+                System.out.print(">>" + message + "\n");
             }
             ms.leaveGroup(group);
             ms.close();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void run() {
-        System.out.println("sono qui");
         receive();
     }
 }

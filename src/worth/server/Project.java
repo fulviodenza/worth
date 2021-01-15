@@ -94,28 +94,6 @@ public class Project {
         return ipAddress;
     }
 
-    public void getRemainingMessages(String username) {
-
-        Member m = null;
-        try {
-            m = Database.getUser(username);
-        } catch (MemberNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        assert m != null;
-        for (int i = m.getIndexMessageQueue(); i < messageQueue.size(); i++) {
-
-            UDPServer.send(messageQueue.get(i), ipAddress);
-        }
-
-        m.setIndexMessageQueue(messageQueue.size()-1);
-    }
-
-    public void sendMessage(String username, String message) {
-        messageQueue.add(username+message);
-    }
-
     //METODI PER AGGIUNTA MEMBRO AL PROGETTO
     public void addMember(String username) {
         if(!memberList.contains(username)) {
@@ -131,7 +109,6 @@ public class Project {
         Gson gson = new Gson();
         BufferedReader br;
         try {
-            System.out.println(path.toString());
             br = new BufferedReader(new FileReader(path+"/memberList.json"));
             Type type = new TypeToken<ArrayList<String>>() {
             }.getType();
@@ -141,6 +118,23 @@ public class Project {
         }
 
         return memberList.contains(username);
+    }
+
+    public boolean isInCardsList(String cardName) {
+
+        Card card = new Card(cardName, null);
+        Gson gson = new Gson();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(path+"/cards.json"));
+            Type type = new TypeToken<ArrayList<Card>>() {
+            }.getType();
+            taskList = gson.fromJson(br, type);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return taskList.contains(card);
     }
 
     public void updateUserList() {

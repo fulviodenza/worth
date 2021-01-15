@@ -1,10 +1,12 @@
 # worth
 Another workflow management app
 
-# TASK List
+# Final TASK List
 - [x] Implement chat
-- [ ] Clean code
+- [x] Clean code
 - [ ] Handle some exceptions
 - [ ] Write Docs
-- [ ] Handle problems with strings
+- [x] Handle problems with strings
 - [x] Implement random ip generator for multicast set of addresses
+- [x] Implement automated messages for some actions
+- [ ] Implement project delete

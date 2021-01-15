@@ -4,7 +4,8 @@
     "password": "besozzi",
     "projectList": [
       "chromium",
-      "youtube_dl"
+      "youtube_dl",
+      "cioamon"
     ]
   },
   {
@@ -12,7 +13,8 @@
     "password": "esposito",
     "projectList": [
       "youtube_dl",
-      "chromium"
+      "chromium",
+      "telefono"
     ]
   },
   {
@@ -29,7 +31,10 @@
       "birra",
       "pianoforte",
       "porcoddio",
-      "sciarpa"
+      "sciarpa",
+      "cioamon",
+      "ciao",
+      "telefono"
     ]
   }
 ]

@@ -67,16 +67,6 @@ public class Database {
         return database;
     }
 
-    public static synchronized ArrayList<String> getProjectList(String nickname) {
-        ArrayList<String> projectList = null;
-        try {
-            projectList = getUser(nickname).getProjectList();
-        } catch (MemberNotFoundException e) {
-            e.printStackTrace();
-        }
-        return projectList;
-    }
-
     public static synchronized void updateProjectList(String nickname, String projectName) {
         try {
             if(db.containsKey(nickname)) {
@@ -121,20 +111,6 @@ public class Database {
         } catch(MemberNotFoundException e) {
             return false;
         }
-    }
-
-    public static synchronized void printUsers() {
-        db.forEach((k,v) -> System.out.printf("username: %s, status: %s\n", k, v.getMemberStatus()));
-    }
-
-    public static synchronized boolean isMember(String username, String projectName) {
-        try {
-            ArrayList<String> list = getUser(username).projectList;
-            return list.contains(projectName);
-        } catch (MemberNotFoundException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public String getListUsers() {

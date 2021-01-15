@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Member {
 
     private int indexMessageQueue;
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
     private MemberStatus status;
     public ArrayList<String> projectList;
 
@@ -36,14 +36,13 @@ public class Member {
         this.projectList = projectList;
     }
 
-    public int addToProject(String projectName) {
+    public void addToProject(String projectName) {
         if(projectList.contains(projectName)) {
             System.out.println("The user is already in the selected project");
-            return 1;
+            return;
         }
         projectList.add(projectName);
 
-        return 0;
     }
 
     public ArrayList<String> getProjectList() {

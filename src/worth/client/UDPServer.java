@@ -8,9 +8,10 @@ public class UDPServer {
 
     private static final int port = 20005;
 
-    public static void send(String msg, String ip) {
+    public static void send(String msg, String ip, String username) {
 
         try {
+            msg = username + ": " + msg;
             DatagramSocket ds = new DatagramSocket();
             InetAddress group = InetAddress.getByName(ip);
             byte[] buffer = msg.getBytes(StandardCharsets.UTF_8);

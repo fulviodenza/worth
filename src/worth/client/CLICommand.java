@@ -37,8 +37,12 @@ class LoginHandler extends CLICommand {
     public String manage(Scanner scanner) throws RemoteException {
         String username = scanner.next();
         String password = scanner.next();
-        server.register(stub, username);
-        return "login@"+username+":"+password;
+        if(username.contains(":") || username.contains("@") || password.contains("@") || password.contains(":")) {
+            return "fail";
+        } else {
+            server.register(stub, username);
+            return "login@" + username + ":" + password;
+        }
     }
 }
 
@@ -52,7 +56,11 @@ class LogoutHandler extends CLICommand {
         String username = scanner.next();
 
         server.unregister(stub, username);
-        return "logout@"+username;
+        if(username.contains(":") || username.contains("@")) {
+            return "fail";
+        } else {
+            return "logout@" + username;
+        }
     }
 }
 
@@ -64,8 +72,12 @@ class CreateProject extends CLICommand {
 
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
-        System.out.println("create_project@"+projectName);
-        return "create_project@"+projectName;
+        if(projectName.contains(":") || projectName.contains("@")) {
+            return "fail";
+        } else {
+            System.out.println("create_project@" + projectName);
+            return "create_project@" + projectName;
+        }
     }
 }
 
@@ -141,8 +153,12 @@ class AddUser extends CLICommand {
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
         String usernameToAdd = scanner.next();
-        System.out.println("Sending command add_member@"+projectName+":"+usernameToAdd);
-        return "add_member@"+projectName+":"+usernameToAdd;
+        if(projectName.contains(":") || projectName.contains("@") || usernameToAdd.contains(":") || usernameToAdd.contains("@")) {
+            return "fail";
+        } else {
+            System.out.println("Sending command add_member@" + projectName + ":" + usernameToAdd);
+            return "add_member@" + projectName + ":" + usernameToAdd;
+        }
     }
 }
 
@@ -153,8 +169,12 @@ class ShowMembers extends CLICommand {
 
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
-        System.out.println("Sending command show_members@"+projectName);
-        return "show_members@"+projectName;
+        if(projectName.contains(":") || projectName.contains("@")){
+            return "fail";
+        } else {
+            System.out.println("Sending command show_members@" + projectName);
+            return "show_members@" + projectName;
+        }
     }
 }
 
@@ -176,8 +196,12 @@ class ShowCards extends CLICommand {
 
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
-        System.out.println("Sending command show_cards@"+projectName);
-        return "show_cards@"+projectName;
+        if(projectName.contains(":") || projectName.contains("@")){
+            return "fail";
+        } else {
+            System.out.println("Sending command show_cards@" + projectName);
+            return "show_cards@" + projectName;
+        }
     }
 }
 
@@ -189,8 +213,13 @@ class ShowCard extends CLICommand {
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
         String cardName = scanner.next();
-        System.out.println("Sending command show_card@"+projectName+":"+cardName);
-        return "show_card@"+projectName+":"+cardName;
+
+        if(projectName.contains(":") || projectName.contains("@") || cardName.contains(":") || cardName.contains("@")){
+            return "fail";
+        } else {
+            System.out.println("Sending command show_card@" + projectName + ":" + cardName);
+            return "show_card@" + projectName + ":" + cardName;
+        }
     }
 }
 
@@ -201,8 +230,12 @@ class GetCardHistory extends CLICommand {
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
         String cardName = scanner.next();
-        System.out.println("Sending command get_card_history@"+projectName+":"+cardName);
-        return "get_card_history@"+projectName+":"+cardName;
+        if(projectName.contains(":") || projectName.contains("@") || cardName.contains(":") || cardName.contains("@")){
+            return "fail";
+        } else {
+            System.out.println("Sending command get_card_history@" + projectName + ":" + cardName);
+            return "get_card_history@" + projectName + ":" + cardName;
+        }
     }
 }
 
@@ -216,8 +249,12 @@ class ChangeStatus extends CLICommand {
         String startingList = scanner.next();
         String endingList = scanner.next();
 
-        System.out.println("Sending command change_status@"+projectName+":"+cardName+":"+startingList+":"+endingList);
-        return "change_status@"+projectName+":"+cardName+":"+startingList+":"+endingList;
+        if(projectName.contains(":") || projectName.contains("@") || cardName.contains("@") || cardName.contains(":") || startingList.contains(":") || startingList.contains("@") || endingList.contains(":") || endingList.contains("@")){
+            return "fail";
+        } else {
+            System.out.println("Sending command change_status@" + projectName + ":" + cardName + ":" + startingList + ":" + endingList);
+            return "change_status@" + projectName + ":" + cardName + ":" + startingList + ":" + endingList;
+        }
     }
 }
 
@@ -229,8 +266,12 @@ class Send extends CLICommand {
         String projectName = scanner.next();
         String message = scanner.nextLine();
 
-        System.out.println("Sending command send@"+projectName+":"+message);
-        return "send@"+projectName+":"+message;
+        if(projectName.contains(":") || projectName.contains("@") || message.contains(":") || message.contains("@")) {
+            return "fail";
+        } else {
+            System.out.println("Sending command send@" + projectName + ":" + message);
+            return "send@" + projectName + ":" + message;
+        }
     }
 }
 
@@ -241,7 +282,11 @@ class Read extends CLICommand {
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
 
-        System.out.println("Sending command read@"+projectName);
-        return "read@"+projectName;
+        if(projectName.contains(":") || projectName.contains("@")) {
+            return "fail";
+        } else {
+            System.out.println("Sending command read@" + projectName);
+            return "read@" + projectName;
+        }
     }
 }
