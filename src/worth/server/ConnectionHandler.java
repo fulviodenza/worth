@@ -5,6 +5,7 @@ import worth.exceptions.MemberNotFoundException;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
@@ -180,6 +181,7 @@ public class ConnectionHandler implements Runnable{
                     }
                     break;
                 case "show_cards":
+                    System.out.println("Received show_cards command");
                     projectName = command[1];
 
                     p = new Project(projectName);
@@ -278,7 +280,6 @@ public class ConnectionHandler implements Runnable{
                 case "read":
                     System.out.println("Received read command");
                     projectName = command[1]; //read@projectName
-                    System.out.println(command[1]);
 
                     p = new Project(projectName);
 
@@ -287,6 +288,23 @@ public class ConnectionHandler implements Runnable{
                             if(p.isInMemberList(member.getUsername())) {
                                 System.out.println(projectName+":"+p.getIpAddress()+":"+member.getUsername());
                                 out.println(projectName+":"+p.getIpAddress());
+                            }
+                        }
+                    }
+                    break;
+                case "delete_project":
+                    System.out.println("Received delete project command");
+                    projectName = command[1];
+
+                    p = new Project(projectName);
+
+                    if(logged) {
+                        if(p.isInMemberList(member.getUsername())) {
+                            if(p.areAllCardsDone()) {
+                                System.out.println("Deleting project");
+                                p.deleteDir(new File("../projects/"+projectName+"/"));
+                            } else {
+                                System.out.println("Not all cards are in DONE state");
                             }
                         }
                     }

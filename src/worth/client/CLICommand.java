@@ -6,6 +6,7 @@ import worth.server.ServerNotificationInterface;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.rmi.NotBoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -139,7 +140,7 @@ class CreateCard extends CLICommand {
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
         String cardName = scanner.next();
-        String cardDescription = scanner.next();
+        String cardDescription = scanner.nextLine();
         System.out.println("Sending command add_card@"+projectName+":"+cardName+":"+cardDescription);
         return "add_card@"+projectName+":"+cardName+":"+cardDescription;
     }
@@ -196,6 +197,7 @@ class ShowCards extends CLICommand {
 
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
+        System.out.println("projectName");
         if(projectName.contains(":") || projectName.contains("@")){
             return "fail";
         } else {
@@ -287,6 +289,21 @@ class Read extends CLICommand {
         } else {
             System.out.println("Sending command read@" + projectName);
             return "read@" + projectName;
+        }
+    }
+}
+
+class DeleteProject extends CLICommand {
+    protected DeleteProject() throws RemoteException, NotBoundException {
+    }
+
+    public String manage(Scanner scanner) {
+        String projectName = scanner.next();
+        if (projectName.contains(":") || projectName.contains("@")) {
+            return "fail";
+        } else {
+            System.out.println("Sending command delete_project@" + projectName);
+            return "delete_project@" + projectName;
         }
     }
 }

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "pagine",
+    "description": "leggere",
+    "status": "DONE",
+    "cardHistory": [
+      "todo",
+      "in_progress",
+      "done"
+    ]
+  }
+]

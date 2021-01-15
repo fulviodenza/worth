@@ -9,4 +9,4 @@ Another workflow management app
 - [x] Handle problems with strings
 - [x] Implement random ip generator for multicast set of addresses
 - [x] Implement automated messages for some actions
-- [ ] Implement project delete
+- [x] Implement project delete

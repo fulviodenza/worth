@@ -170,8 +170,7 @@ public class TCPClient {
                     command = new ShowCards();
                     entireCommand = command.manage(scanner);
                     if(!entireCommand.equals("fail")) {
-                        out.print(entireCommand);
-
+                        out.println(entireCommand);
                         String cardsList = in.readLine();
                         cardsList = cardsList.replace("$", "\n");
                         System.out.println(cardsList);
@@ -248,6 +247,18 @@ public class TCPClient {
                         startChat(info[1], info[0]);
                     } else {
                         System.out.println("Character : or @ not allowed");
+                    }
+                    break;
+                case "delete_project":
+                    System.out.println("Received delete project");
+                    command = new DeleteProject();
+                    entireCommand = command.manage(scanner);
+                    System.out.println(entireCommand);
+
+                    if(!entireCommand.equals("fail")) {
+                        out.println(entireCommand);
+                    } else {
+                        System.out.println("Character : or @ not allowed or refused action");
                     }
                     break;
                 default:

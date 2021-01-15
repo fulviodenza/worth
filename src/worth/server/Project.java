@@ -3,6 +3,7 @@ package worth.server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import worth.MemberStatus;
 import worth.client.UDPServer;
 import worth.exceptions.MemberNotFoundException;
 
@@ -214,6 +215,19 @@ public class Project {
         return output.toString();
     }
 
+    public boolean areAllCardsDone() {
+        readCardList();
+        boolean allDone = true;
+
+        for(Card c : taskList) {
+            if(c.getStatus() != CardStatus.DONE) {
+                allDone = false;
+                break;
+            }
+        }
+        return allDone;
+    }
+
     public String showCard(String cardInput) {
         readCardList();
         StringBuilder output = new StringBuilder();
@@ -259,13 +273,13 @@ public class Project {
             if(found) {
 
                 taskList.get(taskList.indexOf(card)).addToCardHistory("in_progress");
+                taskList.get(taskList.indexOf(card)).setStatus(CardStatus.IN_PROGRESS);
                 TODO_List.remove(card);
-                writeTodoList();
                 readInProgressList();
                 IN_PROGRESS_List.add(card);
                 card.addToCardHistory("in_progress");
                 card.setStatus(CardStatus.IN_PROGRESS);
-
+                writeTodoList();
                 writeInProgressList();
                 updateCardList();
                 System.out.println("MOVED");
@@ -284,12 +298,13 @@ public class Project {
             }
             if(found) {
                 taskList.get(taskList.indexOf(card)).addToCardHistory("to_be_revised");
+                taskList.get(taskList.indexOf(card)).setStatus(CardStatus.TO_BE_REVISED);
                 IN_PROGRESS_List.remove(card);
-                writeInProgressList();
                 readToBeRevisedList();
                 TO_BE_REVISED_List.add(card);
                 card.addToCardHistory("to_be_revised");
                 card.setStatus(CardStatus.TO_BE_REVISED);
+                writeInProgressList();
                 writeToBeRevisedList();
                 updateCardList();
                 System.out.println("MOVED");
@@ -308,12 +323,13 @@ public class Project {
             }
             if(found) {
                 taskList.get(taskList.indexOf(card)).addToCardHistory("in_progress");
+                taskList.get(taskList.indexOf(card)).setStatus(CardStatus.IN_PROGRESS);
                 TO_BE_REVISED_List.remove(card);
-                writeToBeRevisedList();
                 readInProgressList();
                 IN_PROGRESS_List.add(card);
                 card.addToCardHistory("in_progress");
                 card.setStatus(CardStatus.IN_PROGRESS);
+                writeToBeRevisedList();
                 writeInProgressList();
                 updateCardList();
                 System.out.println("MOVED");
@@ -332,12 +348,13 @@ public class Project {
             }
             if(found) {
                 taskList.get(taskList.indexOf(card)).addToCardHistory("done");
+                taskList.get(taskList.indexOf(card)).setStatus(CardStatus.DONE);
                 IN_PROGRESS_List.remove(card);
-                writeInProgressList();
                 readDoneList();
                 DONE_List.add(card);
                 card.addToCardHistory("done");
                 card.setStatus(CardStatus.DONE);
+                writeInProgressList();
                 writeDoneList();
                 updateCardList();
                 System.out.println("MOVED");
@@ -356,12 +373,13 @@ public class Project {
             }
             if(found) {
                 taskList.get(taskList.indexOf(card)).addToCardHistory("done");
+                taskList.get(taskList.indexOf(card)).setStatus(CardStatus.DONE);
                 TO_BE_REVISED_List.remove(card);
-                writeToBeRevisedList();
                 readDoneList();
                 DONE_List.add(card);
                 card.addToCardHistory("done");
                 card.setStatus(CardStatus.DONE);
+                writeToBeRevisedList();
                 writeDoneList();
                 updateCardList();
                 System.out.println("MOVED");
@@ -500,5 +518,15 @@ public class Project {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteDir(File file) {
+        File[] contents = file.listFiles();
+        if (contents != null) {
+            for (File f : contents) {
+                deleteDir(f);
+            }
+        }
+        file.delete();
     }
 }
