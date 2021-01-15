@@ -167,7 +167,8 @@ public class TCPClient {
                     command = new Send();
                     out.println(command.manage(scanner));
                     String resultChat = in.readLine();
-                    String[] data = resultChat.split(":", 2);
+                    System.out.println(resultChat);
+                    String[] data = resultChat.split(":");
                     if(data[0].contains("success")) {
                         UDPServer.send(data[2], data[1]);
                     }

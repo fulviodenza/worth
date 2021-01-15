@@ -10,7 +10,10 @@
   {
     "username": "paola",
     "password": "esposito",
-    "projectList": []
+    "projectList": [
+      "youtube_dl",
+      "chromium"
+    ]
   },
   {
     "username": "fulvio",
