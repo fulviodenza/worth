@@ -7,4 +7,4 @@ Another workflow management app
 - [ ] Handle some exceptions
 - [ ] Write Docs
 - [ ] Handle problems with strings
-- [ ] Implement random ip generator for multicast set of addresses
+- [x] Implement random ip generator for multicast set of addresses

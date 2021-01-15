@@ -1,11 +1,11 @@
 package worth.server;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class IPGenerator {
     public static String generateIPAddress() {
 
-        Random r = new Random();
-        return (r.nextInt(256) + "." + r.nextInt(256) + "." + r.nextInt(256) + "." + r.nextInt(256));
+        return (ThreadLocalRandom.current().nextInt(224, 239+1) + "." + ThreadLocalRandom.current().nextInt(0, 256) + "." + ThreadLocalRandom.current().nextInt(0, 256+1) + "." + ThreadLocalRandom.current().nextInt(0, 256+1));
     }
 }
