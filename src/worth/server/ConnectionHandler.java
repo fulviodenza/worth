@@ -5,7 +5,6 @@ import worth.exceptions.MemberNotFoundException;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
@@ -15,8 +14,8 @@ public class ConnectionHandler implements Runnable{
     private BufferedReader in;
     private ServerNotification serverCallback;
     private Scanner sc;
-    private boolean logged;
-    private Member member;
+    public static boolean logged;
+    public static Member member;
 
     public ConnectionHandler(Socket socket, ServerNotification serverCallback) throws RemoteException {
         this.logged = false;
@@ -65,21 +64,35 @@ public class ConnectionHandler implements Runnable{
                     }
                     break;
                 case "logout":
-                    String username = command[1];
-                    System.out.println("Received logout command");
-                    if(!logged) {
-                        System.out.println("No user was logged here");
-                        out.println("SERVER: No user was logged here");
+                    if(command[1] != null) {
+                        String username = command[1];
+                        System.out.println("Received logout command");
+                        if (!logged) {
+                            System.out.println("No user was logged here");
+                            out.println("SERVER: No user was logged here");
 
+                        } else {
+                            if (member.getUsername().equals(username)) {
+                                logged = false;
+                                member.setMemberStatus(MemberStatus.OFFLINE);
+                                System.out.println("Logged out");
+                                out.println("SERVER: logged out");
+                            } else {
+                                System.out.println("Cannot logout");
+                                out.println("SERVER: cannot logout");
+                            }
+                        }
                     } else {
-                        if(member.getUsername().equals(username)) {
+                        System.out.println("Received logout command");
+                        if (!logged) {
+                            System.out.println("No user was logged here");
+                            out.println("SERVER: No user was logged here");
+
+                        } else {
                             logged = false;
                             member.setMemberStatus(MemberStatus.OFFLINE);
                             System.out.println("Logged out");
                             out.println("SERVER: logged out");
-                        } else {
-                            System.out.println("Cannot logout");
-                            out.println("SERVER: cannot logout");
                         }
                     }
                     break;
@@ -139,7 +152,7 @@ public class ConnectionHandler implements Runnable{
                 case "add_member":
                     info = command[1].split(":");
                     projectName = info[0];
-                    username = info[1];
+                    String username = info[1];
 
                     p = new Project(projectName);
 

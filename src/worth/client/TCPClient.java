@@ -5,6 +5,7 @@ import worth.server.ServerNotificationInterface;
 import java.io.*;
 import java.net.Socket;
 import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -37,6 +38,7 @@ public class TCPClient {
     }
 
     public void compute(String cmd) throws IOException {
+
         try {
             this.startConnection();
             Registry registryCB = LocateRegistry.getRegistry(7001);
@@ -45,10 +47,19 @@ public class TCPClient {
             ClientNotification callbackObj = new ClientNotification();
             ClientNotificationInterface stub = (ClientNotificationInterface) UnicastRemoteObject.exportObject(callbackObj, 0);
 
-            CLICommand command;
+            final CLICommand[] command = new CLICommand[1];
             String entireCommand;
             Scanner scanner = new Scanner(System.in);
             ListUsers list;
+
+            Runtime.getRuntime().addShutdownHook(new Thread()
+            {
+                @Override
+                public void run() {
+                        out.println("logout");
+                }
+            });
+
             switch(cmd) {
                 case "register":
                     try {
@@ -64,8 +75,8 @@ public class TCPClient {
                     break;
                 case "login":
                     System.out.println("Sending login command");
-                    command = new LoginHandler();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new LoginHandler();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         System.out.printf("Sent %s command\n", entireCommand);
                         out.println(entireCommand);
@@ -82,11 +93,12 @@ public class TCPClient {
                 case "logout":
                     System.out.println("Sending logout command");
                     System.out.println("write your username");
-                    command = new LogoutHandler();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new LogoutHandler();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         System.out.printf("Sent %s command\n", entireCommand);
                         out.println(entireCommand);
+                        stopChat();
                         System.out.println(in.readLine());
                     } else {
                         System.out.println("Character : or @ not allowed");
@@ -103,8 +115,8 @@ public class TCPClient {
                 case "create_project":
                     System.out.println("Received create_project command");
                     System.out.println("insert the project name");
-                    command = new CreateProject();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new CreateProject();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                     } else {
@@ -114,8 +126,8 @@ public class TCPClient {
                 case "add_card":
                     System.out.println("Received add_card command");
                     System.out.println("insert the project name, the card name and the description");
-                    command = new CreateCard();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new CreateCard();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String result = in.readLine(); //message+username
@@ -128,8 +140,8 @@ public class TCPClient {
                 case "add_member":
                     System.out.println("Received add_member command");
                     System.out.println("insert the project name and the username you want to add to project");
-                    command = new AddUser();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new AddUser();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                     } else {
@@ -139,8 +151,8 @@ public class TCPClient {
                 case "show_members":
                     System.out.println("Received show_members command");
                     System.out.println("insert the project you want show members for");
-                    command = new ShowMembers();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new ShowMembers();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
 
@@ -153,8 +165,8 @@ public class TCPClient {
                     break;
                 case "list_projects":
                     System.out.println("Received list_projects command");
-                    command = new ListProjects();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new ListProjects();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String result = in.readLine();
@@ -167,8 +179,8 @@ public class TCPClient {
                 case "show_cards":
                     System.out.println("Received show_cards command");
                     System.out.println("insert the project you want show cards for");
-                    command = new ShowCards();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new ShowCards();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String cardsList = in.readLine();
@@ -181,8 +193,8 @@ public class TCPClient {
                 case "show_card":
                     System.out.println("Received show_card command");
                     System.out.println("insert the project name and the card name you want to know about");
-                    command = new ShowCard();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new ShowCard();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String cardInfo = in.readLine();
@@ -195,8 +207,8 @@ public class TCPClient {
                 case "get_card_history":
                     System.out.println("Received get_card_history command");
                     System.out.println("insert the project name and the card name you want to know the history about");
-                    command = new GetCardHistory();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new GetCardHistory();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String cardInfoHistory = in.readLine().replace(":", "\n");
@@ -208,8 +220,8 @@ public class TCPClient {
                 case "change_status":
                     System.out.println("Received change status command");
                     System.out.println("insert the project name, the card name");
-                    command = new ChangeStatus();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new ChangeStatus();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String result = in.readLine(); //message+username
@@ -222,8 +234,8 @@ public class TCPClient {
                 case "send":
                     System.out.println("Received send command");
                     System.out.println("insert the project name, the message");
-                    command = new Send();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new Send();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String resultChat = in.readLine();
@@ -239,8 +251,8 @@ public class TCPClient {
                 case "read":
                     System.out.println("Received read command");
                     System.out.println("insert the project name");
-                    command = new Read();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new Read();
+                    entireCommand = command[0].manage(scanner);
                     if(!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String[] info = in.readLine().split(":");
@@ -251,8 +263,8 @@ public class TCPClient {
                     break;
                 case "delete_project":
                     System.out.println("Received delete project");
-                    command = new DeleteProject();
-                    entireCommand = command.manage(scanner);
+                    command[0] = new DeleteProject();
+                    entireCommand = command[0].manage(scanner);
                     System.out.println(entireCommand);
 
                     if(!entireCommand.equals("fail")) {
@@ -268,6 +280,8 @@ public class TCPClient {
             e.printStackTrace();
         }
     }
+
+
 
     private String readChat(String projectName) throws IOException {
         out.println("read@"+projectName);
