@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7abeedda-afe0-4b7b-9e64-1a31590a00b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/doc/template_Article.aux" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/template_Article.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/template_Article.synctex.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/template_Article.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/relazione.aux" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/relazione.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/relazione.synctex.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/relazione.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/client/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/TCPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +104,7 @@
       <workItem from="1610121730063" duration="3542000" />
       <workItem from="1610270484276" duration="3612000" />
       <workItem from="1610290629666" duration="36187000" />
-      <workItem from="1610720279685" duration="26867000" />
+      <workItem from="1610720279685" duration="27768000" />
     </task>
     <task id="LOCAL-00001" summary="add new task to todo list">
       <created>1610720972661</created>
