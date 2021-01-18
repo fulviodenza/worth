@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Database {
+
     private static volatile Database database;
     private static Path dbFile;
     private static final ConcurrentHashMap<String, Member> db = new ConcurrentHashMap<>();

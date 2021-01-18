@@ -24,7 +24,6 @@ public class ConnectionHandler implements Runnable{
         this.serverCallback = serverCallback;
     }
 
-
     public void commandHandler(String cmd) {
         if(cmd == null) throw new NullPointerException();
         if(cmd.equals(".")) throw new IllegalArgumentException();
@@ -138,7 +137,8 @@ public class ConnectionHandler implements Runnable{
                             if(!p.isInCardsList(cardName)) {
                                 p.createCard(cardName, cardDescription);
                                 p.writeTodoList();
-                                out.println("New card added"+":"+p.getIpAddress()+":"+member.getUsername());
+                                out.println(p.getIpAddress()+":"+"New Card Added"+":"+member.getUsername());
+
                             } else {
                                 System.out.println("Card already present");
                                 out.println("SERVER: Card already present");
@@ -249,7 +249,7 @@ public class ConnectionHandler implements Runnable{
                         if (p.isInMemberList(member.getUsername())) {
                             p.moveCard(cardName, oldList, newList);
                             System.out.println("Card status changed");
-                            out.println("Card status changed to "+newList+":"+p.getIpAddress()+":"+member.getUsername());
+                            out.println(p.getIpAddress()+":"+"Card status changed to "+newList+":"+member.getUsername());
                         } else {
                             System.out.println("Only members of the project can change card status");
                             out.println("SERVER: Only members of the project can change card status");

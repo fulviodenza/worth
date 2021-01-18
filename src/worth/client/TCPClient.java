@@ -132,7 +132,7 @@ public class TCPClient {
                         out.println(entireCommand);
                         String result = in.readLine(); //message+username
                         String[] info = result.split(":");
-                        UDPServer.send(info[0], info[1], info[2]);
+                        UDPServer.send(info[1], info[0], info[2]);
                     } else {
                         System.out.println("Character : or @ not allowed");
                     }
@@ -226,7 +226,7 @@ public class TCPClient {
                         out.println(entireCommand);
                         String result = in.readLine(); //message+username
                         String[] info = result.split(":");
-                        UDPServer.send(info[0], info[1], info[2]);
+                        UDPServer.send(info[1], info[0], info[2]);
                     } else {
                         System.out.println("Character : or @ not allowed");
                     }

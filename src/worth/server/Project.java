@@ -3,9 +3,6 @@ package worth.server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import worth.MemberStatus;
-import worth.client.UDPServer;
-import worth.exceptions.MemberNotFoundException;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -24,7 +21,6 @@ public class Project {
     public ArrayList<Card> IN_PROGRESS_List;
     public ArrayList<Card> TO_BE_REVISED_List;
     public ArrayList<Card> DONE_List;
-    public List<String> messageQueue;
 
     Path path;
     String pathString;
@@ -42,7 +38,6 @@ public class Project {
         IN_PROGRESS_List = new ArrayList<>();
         TO_BE_REVISED_List = new ArrayList<>();
         DONE_List = new ArrayList<>();
-        messageQueue = new ArrayList<>();
 
         //Creation of a file for each list
         File todo = new File(path+"todo_list.json");
@@ -179,6 +174,7 @@ public class Project {
         for(Card c : taskList) {
             if(cardName.equals(c.getName())) {
                 System.out.println("The task is already in the Card list");
+                return;
             }
         }
 //        readCardList();
