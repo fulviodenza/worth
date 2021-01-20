@@ -2,34 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7abeedda-afe0-4b7b-9e64-1a31590a00b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/doc/images/architecture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/images/databaseDiagram.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/images/graphStatus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pianoforte/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pianoforte/ip_address.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pianoforte/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pianoforte/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/project/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/project/done.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/project/in_progress_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/project/ip_address.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/project/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/project/todo_list.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/images/graphChat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/template_Article.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/ciaomondo/ip_address.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/ciaomondo/memberList.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/template_Article.aux" beforeDir="false" afterPath="$PROJECT_DIR$/doc/template_Article.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/template_Article.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/doc/template_Article.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/template_Article.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/doc/template_Article.synctex.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/template_Article.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doc/template_Article.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/libr/cards.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/libr/done.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/libr/in_progress_list.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/libr/ip_address.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/libr/memberList.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/libr/todo_list.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/CLICommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/CLICommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/client/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/TCPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/client/UDPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/UDPClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/TCPConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +117,7 @@
       <workItem from="1610121730063" duration="3542000" />
       <workItem from="1610270484276" duration="3612000" />
       <workItem from="1610290629666" duration="36187000" />
-      <workItem from="1610720279685" duration="42418000" />
+      <workItem from="1610720279685" duration="63177000" />
     </task>
     <task id="LOCAL-00001" summary="add new task to todo list">
       <created>1610720972661</created>

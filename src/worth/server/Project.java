@@ -50,10 +50,11 @@ public class Project {
     }
 
     //CREAZIONE PROGETTO
-    public void createDirectory(String projectName) {
+    public int createDirectory(String projectName) {
         try {
             if(Files.exists(path)){
                 System.out.println("Project exists in the project folder");
+                return 1;
             } else {
                 Writer writer;
                 Files.createDirectories(path);
@@ -65,10 +66,12 @@ public class Project {
                 gson.toJson(ipAddress, writer);
                 writer.flush();
                 writer.close();
+                return 0;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public String getIpAddress() {

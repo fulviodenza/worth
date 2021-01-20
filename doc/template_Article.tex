@@ -4,6 +4,13 @@
 \usepackage{listings}
 \usepackage{wrapfig}
 \usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec, lipsum}
+\usepackage{hyperref}
+
+\titleformat{\paragraph}[block]{\bfseries\filcenter}{}{0pt}{}
+
 
 \graphicspath{ {./images/} }
 
@@ -74,7 +81,17 @@
 WORTH è un modo per condividere il workflow di un progetto. Esso rappresenta una delle metodologie AGILE che si sono sviluppate negli ultimi anni. Il modello di WORTH è un modello semplificato di applicativi del campo, quali easy redmine, trello e molti altri. In WORTH vediamo l'esistenza di una sequenza di stati dei vari task, quale todo, in progress, to be revised e done, la presenza di una chat per ogni progetto, azioni basilari sulle card (o task) quali change status, add card, get card history ed altre.
 
 Il modus operandi per presentare i comandi del progetto sarà bilaterale, ossia verrà descritto l'azione del client e la risposta del server, mentre le strutture dati e le scelte di implementazione delle astrazioni saranno presentate nelle rispettive sezioni del server o del client.
-
+\section{Testing}
+Per testare il progetto basta andare nel percorso:
+worth/src/ ed avviare il server con
+\begin{lstlisting}[language=bash]
+	./runServer.sh
+\end{lstlisting}
+ed il client con
+\begin{lstlisting}[language=bash]
+	./runClient.sh
+\end{lstlisting}
+Dal client basterà iniziare ad usare il programma secondo le specifiche.
 \section{Package Server}
 Il server contiene la logica del nostro applicativo, contiene le Classi per descrivere le componenti di WORTH, esso parte da una classe Main.
 \subsection{Main}
@@ -84,7 +101,7 @@ Il main presenta le istanziazioni delle classi per la connessione TCP e per la R
 //REGISTER
 UserRegister ur = new UserRegister();
 Runtime.getRuntime().exec("rmiregistry 2020");
-System.setProperty("java.rmi.server.hostname","0.0..0");
+System.setProperty("java.rmi.server.hostname","0.0.0.0");
 ur.RemoteHandler(5455);
 
 //LOGIN
@@ -144,7 +161,7 @@ containsUser è il metodo per restituire una risposta alla domanda: "l'utente si
 \paragraph{getListUser}
 Il metodo getListUser viene usato per restituire una stringa contente tutti gli utenti separati, nella stringa, da un carattere speciale \$ e ogni utente è descritto da una coppia username:status
 \subsection{CardStatus, Card, Project}
-CardStatus è l'enum per definire gli stati in cui si può trovare una Card, Card, a sua volta, è la definizione di una Card come data nelle specifiche, Project è la composizione delle Cards, in Project vengono definite svariate strutture per organizzare le card.
+CardStatus è l'enum per definire gli stati in cui si può trovare una Card, Card, a sua volta, è la definizione di una Card come data nelle specifiche, Project è la composizione delle Cards, in Project vengono definite svariate strutture per organizzare le card.	
 \begin{center}
 	\includegraphics[width=1\textwidth]{architecture}
 \end{center}
@@ -180,7 +197,7 @@ public ArrayList<Card> DONE_List;
 Ogni Status possibile ha una lista associata, in aggiunta a questi abbiamo una taskList, ossia la lista di tutte le Card in un progetto, memberList, ossia la lista dei membri di un progetto e, ovviamente, projectName, il nome identificativo del progetto.
 Il metodo costruttore di Project non è altro che l'istanziazione delle varie liste, rappresentate da $Arraylist<String>$ che contengono semplicemente i nomi delle varie Card presenti nel singolo Progetto e la creazione dei file per ogni singola lista, in modo da garantire la persistenza.
 La struttura di una cartella progetto è questa:
-\begin{lstlisting}[style=ascii-tree]
+\begin{lstlisting}[style=ascii-tree,caption={tree projects}]
 	projects/
 	└── project
 	├── cards.json
@@ -191,8 +208,9 @@ La struttura di una cartella progetto è questa:
 	├── memberList.json
 	└── todo_list.json
 \end{lstlisting}
+
 Oltre a questo, il metodo costruttore contiene anche la generazione di un ip usando il metodo statico
-\begin{lstlisting}
+\begin{lstlisting}[language=java, caption={IPGenerator class}]
 public class IPGenerator {
 	public static String generateIPAddress() {
 		
@@ -273,6 +291,7 @@ Abbiamo poi dei metodi ausiliari
 	member1\$member2\$...\$memberN,
 	ossia la lista di membri appartenenti a un progetto, che sarà poi manipolata dal client.
 	\item moveCard, infine abbiamo la move card che segue il seguente automa:
+	\label{moveCard}
 	\begin{center}
 		\includegraphics[scale=.5]{graphStatus}
 	\end{center}
@@ -280,13 +299,114 @@ Abbiamo poi dei metodi ausiliari
 \end{itemize}
 \subsection{TCPConnection e ConnectionHandler}
 Il server, come abbiamo visto nel main, istanzia l'oggetto TCPConnection e "starta" il thread.
-Lo fa istanziando una ServerSocket presso la porta indicata nel main e, all'interno di un ciclo infinito, istanzia un oggetto Thread che istanzia una ConnectionHandler, passandogli come parametri serverSocket.accept() e serverNotification, questi due parametri serviranno al gestore della connessione per mandare sulla socket le risposte ai comandi invocati dal client e la serverNotification per utilizzare la Callback RMI per inviare la lista di utenti ONLINE e OFFLINE presenti nel sistema.\\
-Sulla serverSocket il server riceverà il comando mandato dal client conservandolo nell'array \textit{command}, l'array command avrà nella posizione 0 il comando stesso, nella posizione 1 conterrà i parametri del comando stesso, separati da un ":".
+Lo fa istanziando una ServerSocket presso la porta indicata nel main e, all'interno di un ciclo infinito, chiama il metodo execute del threadpool, passandogli come parametri serverSocket.accept() e serverNotification,
+\begin{lstlisting}[language=java]
+while(true) {
+	pool.execute(new ConnectionHandler(serverSocket.accept(), serverNotification));
+}
+\end{lstlisting}
+ questi due parametri serviranno al gestore della connessione per mandare sulla socket le risposte ai comandi invocati dal client e la serverNotification per utilizzare la Callback RMI per inviare la lista di utenti ONLINE e OFFLINE presenti nel sistema.\\
+Sulla serverSocket il server riceverà il comando mandato dal client conservandolo nell'array \textit{command}, l'array command avrà nella posizione 0 il comando stesso, nella posizione 1 conterrà i suoi parametri, separati da un ":".
 In questa implementazione \textit{command[0]} verrà inserito all'interno di uno switch...case per gestire ogni singolo comando che arrivi al server e all'occorrenza verranno separati i parametri di \textit{command[0]} in ogni case a seconda di quanti parametri il \textit{command[0]} prenda.\\
 Torneremo dopo su ogni case al fine di capirne meglio l'implementazione dei comandi.
 \subsection{RMI: ServerNotification e UserRegister}
 \paragraph{UserRegister} La classe UserRegister viene usata per gestire il comando di registrazione dell'utente ed implementa i metodi dell'interfaccia. \\Per l'implementazione del metodo register ho creato un Registry sull'host presso la porta 5455 e ho bindato il nome "RegisterUserInterface" all'oggetto UserRegister, in modo che fosse localizzabile dal client. Il metodo register non fa altro che aggiungere l'utente al file database.json se l'utente con il nome utente inserito dal client non esiste già, altrimenti skippa l'azione stampando "SERVER: user already registered!".
-\paragraph{ServerNotification} La classe ServerNotification viene usata per gestire il servizio di notifica degli utenti e del loro stato. ServerNotification ha un campo $List<ClientNotificationInterface> clients$ e un campo $List<String> usersList$, il suo metodo costruttore è semplicemente l'istanziazione di queste due liste. Quando si effettua una chiamata al metodo register, si iscrive semplicemente il client al servizio di notifica aggiungendolo alla lista e si aggiunge la stringa relativa al suo username alla lista di Stringhe, quando si effettua una unregister si rimuove il client e la stringa relativa al suo username dalle liste relative.
+\paragraph{ServerNotification}
+\label{serverRMI} La classe ServerNotification viene usata per gestire il servizio di notifica degli utenti e del loro stato. ServerNotification ha un campo\\ $List<ClientNotificationInterface> clients$ e un campo $List<String> usersList$, il suo metodo costruttore è semplicemente l'istanziazione di queste due liste. Quando si effettua una chiamata al metodo register, si iscrive semplicemente il client al servizio di notifica aggiungendolo alla lista e si aggiunge la stringa relativa al suo username alla lista di Stringhe, quando si effettua una unregister si rimuove il client e la stringa relativa al suo username dalle liste relative.
 sendMemberList effettua una singola chiamata al metodo doCallbacks il quale, a sua volta, genera un iteratore di clients e finchè questo iteratore non giunge al termine, istanzia un oggetto della classe ClientNotificationInterface client ed effettua una chiamata al metodo notify di quest'ultima classe.\newpage
 \section{Package Client}
+\subsection{Main}
+Il main del client contiene innanzitutto l'istanziazione di TCPClient che vedremo dopo, oltre a ciò contiene un ciclo che continua finchè non viene interrotto il thread in cui prende come input i commandi passati dall'utente e passa questi ultimi al metodo compute di clientConnection, ossia la nostra connessione TCP.
+\subsection{TCPClient}
+La classe TCPClient contiene il cuore della logica del client. In questa classe abbiamo 3 campi importanti:
+\begin{lstlisting}[language=java]
+private Socket clientSocket;
+private PrintWriter out;
+private BufferedReader in;
+\end{lstlisting}
+La prima variabile viene usata per far connettere la socket del client a quella del server in modo da stabilire la connessione, il secondo campo è il canale per scrivere sulla socket e il terzo campo è il canale per ricevere dalla socket.
+Il metodo cardine del client è il metodo compute, questo prende in input una stringa cmd e decide cosa fare in base al contenuto di quella stringa.
+Nel capitolo 4 descriveremo i comandi.
+\subsection{CLICommand}
+CLICommand è una classe astratta che definisce la struttura di un comando base.
+Ogni classe che estende CLICommand deve implementare un metodo manage(Scanner scanner) per gestire l'input dell'utente in cui, in base al comando, prende i parametri di cui quest'ultimo ha bisogno e li impacchetta nel modo seguente:\\
+Sia N $\geq$ 1,
+$$command@parameter0:...:parameterN$$
+Oppure, qualora il comando non ammetta parametri:
+$$command$$
+Quindi, ogni classe che estende CLICommand, non fa che creare un formato standard di impacchettamento dei comandi con i loro parametri affinchè il server possa usare un modo univoco per spacchettare le stringhe che riceve e gestirle in modo appropriato.
+In questa relazione non ci soffermeremo su ogni sottoclasse, vista la grande somiglianza tra tutte.
+Nel capitolo 4 ci soffermeremo sugli altri metodi di questa classe.
+\subsection{ClientNotification e ClientNotificationInterface}
+ClientNotificationInterface è un'interfaccia che contiene un solo metodo: notify.
+ClientNotification implementa l'omonima interfaccia con un singolo metodo.
+La notify non fa altro che venire chiamata dal server tramite il registro RMI in modo da stampare sul client la lista di utenti che, all'inizio è impacchettata in una stringa della forma:
+$$user1\$user2\$...\$userN$$
+e al posto del carattere speciale \$ vi sostituisce un \textbackslash n in modo da separare con un new line ogni utente e renderlo leggibile per l'utente.
+\subsection{RemoteHandlerClient}
+La classe RemoteHandlerClient contiene un solo metodo "registerStub" che viene chiamato al momento della registrazione di un nuovo utente. All'interno di questo metodo si effettua una LocateRegistry sulla porta 5455, poi si effettua un lookup del nome del registro e, in base alla risposta del server RMI, stampa il risultato della registrazione, che può essere:
+"\textit{You have been successfully registered}" o "\textit{You're already present in the Database!}"
+\section{Comandi}
+L'intento di questa sezione è mostrare come il comando viene incapsulato e quali sono le operazioni, lato server o client, che vengono eseguite, tuttavia è possibile che ci siano ridondanze con quanto già scritto nelle specifiche del progetto.
+\paragraph{register}
+Il comando register prende in input due parametri: username e password, esso istanzia, lato client, un oggetto RemoteHandlerClient, attraverso \textit{scanner.next()} prende gli altri due parametri ed effettua la registerStub della classe suddetta. Il server gestirà questo commando nel metodo register di UserRegister, aggiungendo, se l'utente non esiste già, al Database, tramite la chiamata:
+\begin{lstlisting}[language=java]
+Member m = new Member(nickname, password);
+Database.getDatabase().updateMember(m);
+\end{lstlisting}
+Restituisce 1 o 0, rispettivamente se il server non riesce ad aggiungere l'utente indicato o se ci riesce.
+\paragraph{login}
+L'operazione di login incapsula (come dicevamo dei comandi che estendono CLICommand) l'intero comando in una stringa della forma\\ login@username:password. Se l'utente non inserisce caratteri speciali all'interno delle stringhe, il client manda la stringa al server.
+Lato server, la login effettua un controllo per vedere se l'utente esiste nel Database, in tal caso salva l'utente con lo stesso username ricevuto dal client, successivamente effettua un controllo per capire se la password coincida con quella ricevuta e, se quell'utente non è già loggato, setta il suo stato a ONLINE, setta la variabile logged a true, manda la stringa [OK SERVER: Logged in!] e effettua la sendMemberList, che abbiamo trattato in \autoref{serverRMI}.
+Il risultato della login arriva sotto forma di stringa "[OK] message" o "[KO] message", per decidere se stampare o meno la lista degli utenti il client effettua una ricerca della sottostringa "[OK]" e se questa sottostringa esiste, stampa la lista chiamando il comando ListUsers che vedremo dopo.
+\paragraph{logout}
+Logout prende un solo parametro, ossia il nickname dell'utente di cui si vuole fare il logout, quindi incapsula il comando in logout@username. Effettuo prima il controllo che il client sia loggato, se lo è, controlliamo che l'utente loggato da quel client sia lo stesso di quello di cui vuole fare il logout, poi settiamo la variabile logged e lo stato dell'utente a false e successivamente scriviamo sullo stream in output il risultato dell'operazione.
+\paragraph{create\_project}
+La struttura di create\_project è create\_project@projectName. Quando la stringa arriva nel server, aggiunge innanzitutto il creatore del progetto alla lista utenti, poi istanzia un nuovo progetto, ne crea la cartella e manda il messaggio di riuscita creazione al client.
+\paragraph{add\_card}
+La struttura di add\_card è la seguente:\\
+add\_card@projectName:cardName:cardDescription, una volta spedita questa stringa al server, quest'ultimo controlla che l'utente sia nella lista membri del progetto, se appartiene a questa lista, controlla che la card inserita dall'utente non esista già, dopo aver fatto questi controlli provvede ad aggiungere la card creandola con il metodo createCard di Project, aggiunge la card direttamente nella Todo List e manda il messaggio sulla chat udp (di cui parleremo dopo)
+\paragraph{add\_member}
+Lato Client la add\_member incapsula il comando in questo modo:\\ add\_member@projectName:usernameToAdd. Una volta che la stringa arriva al server, questo effettua prima di tutto il controllo che l'utente da aggiungere esista, successivamente controllo che l'utente che ha mandato il comando sia effettivamente nella memberList del progetto che ha indicato, se l'utente da aggiungere è già nel progetto, il server manda al client la stringa \textit{"User already present in the project"} altrimenti lo aggiunge.
+Se l'utente loggato non è nel progetto, il server stampa a schermo \textit{"You cannot add a member to a project if you're not in that project"}
+\paragraph{show\_members}
+Il formato di questo comando è show\_member@projectName. Il server gestisce questo comando mandando al client il risultato del metodo showMembers() di Project, il client, una volta ricevuta la stringa, la stampa sostituendo ogni occorrenza del carattere "\$" con "$\backslash$n" in modo da stamparlo a schermo, lato client, in maniera leggibile.
+\paragraph{show\_cards}
+Il comando show\_cards serve a mostrare tutte le cards di un progetto. Quindi incapsula il comando con show\_cards@projectName. Il procedimento è lo stesso di show\_members, con la differenza che qui si scansiona la lista delle cards di un progetto.
+\paragraph{list\_projects}
+list\_projects serve a mostrare tutti i progetti a cui appartiene l'utente loggato. La procedura per mostrare i progetti è: nel database tengo salvata una lista di progetti a cui l'utente appartiene e li incapsulo in una stringa in cui ogni progetto è separato dal carattere speciale "\$", come per gli altri comandi, il client sostituisce ogni occorrenza del carattere "\$" con "$\backslash$n" in modo da stamparlo a schermo, lato client, in maniera leggibile.
+\paragraph{show\_card}
+Incapsulato come show\_card@projectName:cardName,
+questo comando è utilizzabile solo per chi appartiene al progetto, quindi prima di tutto effettuo un controllo per assicurarmi che l'utente loggato appartenga al progetto, successivamente stampo tutte le informazioni della card indicata nei parametri con il metodo showCard di Project.
+\paragraph{change\_status}
+Questo comando è il comando più lungo del progetto, infatti ha 4 parametri:\\
+change\_status@projectName:cardName:oldList:newList. Se l'utente loggato appartiene al progetto effettuo semplicemente l'operazione di moveCard definita dal metodo omonimo nella classe Project (\autoref{moveCard}) e successivamente scrive sulla chat l'operazione appena effettuata.
+\paragraph{get\_card\_history}
+Il comando get\_card\_history è incapsulato nel seguente modo:\\
+get\_card\_history@projectName:cardName. Esso consiste nello stampare la lista di stati attraverso cui è passata la card, si effettua questa operazione grazie al metodo cardHistory di Project e stampando a schermo, lato client, il risultato.
+\paragraph{delete\_project}
+Il comando delete\_project viene incapsulato così:
+delete\_project@projectName, se c'è un utente loggato in quel terminale, il server procede al controllo della presenza dell'utente nel progetto, se questo controllo va a buon fine, il server controlla che tutte le Cards siano nello stato done, per farlo chiama il metodo areAllCardsDone della classe Project di cui si è parlato sopra (\autoref{moveCard}).
+\section{UDP}
+Sia la classe Client che la classe Server sono lato Client per evitare una piena centralizzazione del progetto, l'unica azione in cui è coinvolto il server è l'ottenimento dell'indirizzo ip del progetto da parte di ogni client.
+\begin{center}
+	\includegraphics[scale=.6]{graphChat}
+\end{center}
+\subsection{UDP Server}
+Contiene un singolo metodo statico
+\begin{lstlisting}
+public static void send(String msg, String ip, String username)
+\end{lstlisting}
+che viene usato dal client per mandare i messaggi.
+Esso prende in input il messaggio, l'ip su cui è situata la chat a cui si vuole mandare il suddetto messaggio e l'username che manda il messaggio.
+Come prima cosa aggiungo al messaggio dell'utente l'username con il carattere ":" in modo da far sapere a tutti i destinatari l'autore del messaggio, successivamente si eseguono tutte le azioni di default per mandare un DatagramPacket: si definisce il gruppo identificato per mezzo dell'ip, che verrà utilizzato per il multicasting, si istanzia l'oggetto MulticastSocket sulla porta 20005, si inserisce il messaggio in un byte array, si incapsula il tutto in un DatagramPacket e si spedisce per mezzo della socket.
+\subsection{UDP Client}
+Il client contiene due metodi:
+\begin{lstlisting}[language=java]
+private void receive()
+public void run()
+\end{lstlisting}
+Il client si occupa sostanzialmente della ricezione dei messaggi ricevuti dal gruppo, si istanzia la socket sulla porta 20005, si effettua la joinGroup presso l'InetAddress del gruppo e si avvia un ciclo while che ha lo scopo di ricevere i DatagramPacket dalla socket precedentemente istanziata, converto in String i byte che arrivano e lo stampo a schermo.
+Una volta terminato il ciclo, visto che un utente può partecipare anche a più chat in una sola esecuzione del programma, chiamo la leaveGroup per chiudere la connessione con quel determinato gruppo relativo al progetto, qualora l'utente abbia la necessità di partecipare ad un altro gruppo.
+L'altro thread, è semplicemente l'override del metodo run per startare il thread che contiene il solo metodo di ricezione dei messaggi sulla chat del client.
 \end{document}

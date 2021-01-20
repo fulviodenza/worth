@@ -2,9 +2,12 @@ package worth.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class TCPConnection {
 
+    ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
     private ServerSocket serverSocket;
     private ServerNotification serverNotification;
 
@@ -16,12 +19,17 @@ public class TCPConnection {
 
         serverSocket = new ServerSocket(port);
         while(true) {
-            Thread t = new Thread(new ConnectionHandler(serverSocket.accept(), serverNotification));
-            t.start();
+            pool.execute(new ConnectionHandler(serverSocket.accept(), serverNotification));
+            //Thread t = new Thread(new ConnectionHandler(serverSocket.accept(), serverNotification));
+            //t.start();
         }
     }
-    public void stop() throws IOException {
-        serverSocket.close();
+    public void stop() {
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            System.out.println("Client Disconnected");
+        }
     }
 
 

@@ -141,6 +141,9 @@ class CreateCard extends CLICommand {
         String projectName = scanner.next();
         String cardName = scanner.next();
         String cardDescription = scanner.nextLine();
+        if(projectName.contains(":") || projectName.contains("@") || cardName.contains(":") || cardName.contains("@") || cardDescription.contains(":") || cardDescription.contains("@")) {
+            return "fail";
+        }
         System.out.println("Sending command add_card@"+projectName+":"+cardName+":"+cardDescription);
         return "add_card@"+projectName+":"+cardName+":"+cardDescription;
     }

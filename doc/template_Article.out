@@ -1,0 +1,21 @@
+\BOOKMARK [1][-]{section.1}{Introduzione}{}% 1
+\BOOKMARK [1][-]{section.2}{Testing}{}% 2
+\BOOKMARK [1][-]{section.3}{Package Server}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Main}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Database}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{CardStatus, Card, Project}{section.3}% 6
+\BOOKMARK [3][-]{subsubsection.3.3.1}{CardStatus}{subsection.3.3}% 7
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Card}{subsection.3.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Project}{subsection.3.3}% 9
+\BOOKMARK [2][-]{subsection.3.4}{TCPConnection e ConnectionHandler}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.5}{RMI: ServerNotification e UserRegister}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Package Client}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Main}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{TCPClient}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{CLICommand}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.4}{ClientNotification e ClientNotificationInterface}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.5}{RemoteHandlerClient}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{Comandi}{}% 18
+\BOOKMARK [1][-]{section.6}{UDP}{}% 19
+\BOOKMARK [2][-]{subsection.6.1}{UDP Server}{section.6}% 20
+\BOOKMARK [2][-]{subsection.6.2}{UDP Client}{section.6}% 21

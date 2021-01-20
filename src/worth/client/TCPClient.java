@@ -5,7 +5,6 @@ import worth.server.ServerNotificationInterface;
 import java.io.*;
 import java.net.Socket;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -122,6 +121,7 @@ public class TCPClient {
                     } else {
                         System.out.println("Character : or @ not allowed");
                     }
+                    System.out.println(in.readLine());
                     break;
                 case "add_card":
                     System.out.println("Received add_card command");

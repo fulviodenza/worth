@@ -104,13 +104,17 @@ public class ConnectionHandler implements Runnable{
                         out.println("SERVER: You must be logged in to create a project");
                     } else {
                         if(Database.getDatabase().containsUser(usernameCreator)) {
-                            Database.updateProjectList(usernameCreator, projectName);
-                            Project project = new Project(projectName);
-                            project.createDirectory(projectName);
-                            project.addMember(usernameCreator);
 
-                            System.out.println("Project created!");
-                            out.println("SERVER: Project created!");
+                            Project project = new Project(projectName);
+                            if(project.createDirectory(projectName) == 0) {
+                                project.addMember(usernameCreator);
+                                Database.updateProjectList(usernameCreator, projectName);
+                                System.out.println("Project created!");
+                                out.println("SERVER: Project created!");
+                            } else {
+                                System.out.println("Project already exists");
+                                out.println("SERVER: Project already exists");
+                            }
                         } else {
                             throw new MemberNotFoundException();
                         }
@@ -166,14 +170,18 @@ public class ConnectionHandler implements Runnable{
                                     p.addMember(username);
                                     Database.updateProjectList(username, projectName);
                                     System.out.println("Member added");
+                                    out.println("Member added");
                                 } else {
                                     System.out.println("User already present in the project");
+                                    out.println("User already present in the project");
                                 }
                             } else {
                                 System.out.println("You cannot add a member to a project if you're not in that project");
+                                out.println("You cannot add a member to a project if you're not in that project");
                             }
                         } else {
                             System.out.println("User not present");
+                            out.println("User not present");
                         }
                     }
                     break;

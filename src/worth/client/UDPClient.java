@@ -33,6 +33,6 @@ public class UDPClient implements Runnable{
 
     @Override
     public void run() {
-        receive();
+receive();
     }
 }
