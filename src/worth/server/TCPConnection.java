@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class TCPConnection {
 
-    ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+    ThreadPoolExecutor pool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
     private ServerSocket serverSocket;
     private ServerNotification serverNotification;
 

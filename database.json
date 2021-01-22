@@ -1,41 +1,9 @@
 [
   {
-    "username": "valerio",
-    "password": "besozzi",
-    "projectList": [
-      "chromium",
-      "youtube_dl",
-      "cioamon"
-    ]
-  },
-  {
-    "username": "paola",
-    "password": "esposito",
-    "projectList": [
-      "youtube_dl",
-      "chromium",
-      "telefono"
-    ]
-  },
-  {
     "username": "fulvio",
     "password": "denza",
     "projectList": [
-      "fisica",
-      "pollo",
-      "chromium",
-      "youtube_dl",
-      "hello_world",
-      "ciao_mondo",
-      "ciaomondo",
-      "birra",
-      "pianoforte",
-      "porcoddio",
-      "sciarpa",
-      "cioamon",
-      "ciao",
-      "telefono",
-      "libr"
+      "ciaomondo"
     ]
   }
 ]

@@ -133,7 +133,11 @@ public class Project {
             e.printStackTrace();
         }
 
-        return taskList.contains(card);
+        if(taskList == null) {
+            return false;
+        } else {
+            return taskList.contains(card);
+        }
     }
 
     public void updateUserList() {
@@ -174,6 +178,9 @@ public class Project {
      */
     public void createCard(String cardName, String cardDescription) {
 
+        if(taskList == null) {
+            taskList = new ArrayList<>();
+        }
         for(Card c : taskList) {
             if(cardName.equals(c.getName())) {
                 System.out.println("The task is already in the Card list");

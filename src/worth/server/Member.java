@@ -45,6 +45,15 @@ public class Member {
 
     }
 
+    public void removeFromProject(String projectName) {
+        if(!projectList.contains(projectName)) {
+            System.out.println("The user is not in the given project");
+            return;
+        } else {
+            projectList.remove(projectName);
+        }
+    }
+
     public ArrayList<String> getProjectList() {
         return projectList;
     }

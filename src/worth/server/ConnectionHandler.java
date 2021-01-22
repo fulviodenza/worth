@@ -5,6 +5,8 @@ import worth.exceptions.MemberNotFoundException;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
@@ -39,23 +41,31 @@ public class ConnectionHandler implements Runnable{
                         String username = info[0];
                         String password = info[1];
 
-                        if (Database.getDatabase().containsUser(username)) {
-                            member = Database.getDatabase().getUser(username);
-                            if (member.getPassword().equals(password)) {
-                                if (member.getMemberStatus() == MemberStatus.ONLINE) {
-                                    System.out.println("User already logged in!");
-                                    out.println("[KO] SERVER: User already logged in!");
+                        if(Files.exists(Path.of("../database.json"))) {
+                            if (Database.getDatabase().containsUser(username)) {
+                                member = Database.getDatabase().getUser(username);
+                                if (member.getPassword().equals(password)) {
+                                    if (member.getMemberStatus() == MemberStatus.ONLINE) {
+                                        System.out.println("User already logged in!");
+                                        out.println("[KO] SERVER: User already logged in!");
+                                    } else {
+                                        member.setMemberStatus(MemberStatus.ONLINE);
+                                        System.out.println(member.getUsername() + " logged in!");
+                                        out.println("[OK] SERVER: Logged in!");
+                                        logged = true;
+                                        serverCallback.sendMemberList(Database.getDatabase().getListUsers());
+                                    }
                                 } else {
-                                    member.setMemberStatus(MemberStatus.ONLINE);
-                                    System.out.println(member.getUsername() + " logged in!");
-                                    out.println("[OK] SERVER: Logged in!");
-                                    logged = true;
-                                    serverCallback.sendMemberList(Database.getDatabase().getListUsers());
+                                    System.out.println("Wrong Password!");
+                                    out.println("SERVER: Wrong Password!");
                                 }
                             } else {
-                                System.out.println("Wrong Password!");
-                                out.println("SERVER: Wrong Password!");
+                                System.out.println("User not present");
+                                out.println("User not present");
                             }
+                        } else {
+                            System.out.println("User not present");
+                            out.println("User not present");
                         }
                     } else {
                         System.out.println("Already logged in from this terminal");
@@ -77,6 +87,7 @@ public class ConnectionHandler implements Runnable{
                                 System.out.println("Logged out");
                                 out.println("SERVER: logged out");
                             } else {
+                                System.out.println(member.getUsername() + " " + username);
                                 System.out.println("Cannot logout");
                                 out.println("SERVER: cannot logout");
                             }
@@ -104,16 +115,20 @@ public class ConnectionHandler implements Runnable{
                         out.println("SERVER: You must be logged in to create a project");
                     } else {
                         if(Database.getDatabase().containsUser(usernameCreator)) {
-
-                            Project project = new Project(projectName);
-                            if(project.createDirectory(projectName) == 0) {
-                                project.addMember(usernameCreator);
-                                Database.updateProjectList(usernameCreator, projectName);
-                                System.out.println("Project created!");
-                                out.println("SERVER: Project created!");
+                            if(!Files.exists(Path.of("../projects/" + projectName))) {
+                                Project project = new Project(projectName);
+                                if (project.createDirectory(projectName) == 0) {
+                                    project.addMember(usernameCreator);
+                                    Database.updateProjectList(usernameCreator, projectName);
+                                    System.out.println("Project created!");
+                                    out.println("SERVER: Project created!");
+                                } else {
+                                    System.out.println("Project already exists");
+                                    out.println("SERVER: Project already exists");
+                                }
                             } else {
-                                System.out.println("Project already exists");
-                                out.println("SERVER: Project already exists");
+                                System.out.println("Project with the given name already exists!");
+                                out.println("Project with the given name already exists!");
                             }
                         } else {
                             throw new MemberNotFoundException();
@@ -137,19 +152,25 @@ public class ConnectionHandler implements Runnable{
                         System.out.println("You must be logged in to add card");
                         out.println("SERVER: You must be logged in to add card");
                     } else {
-                        if (p.isInMemberList(member.getUsername())) {
-                            if(!p.isInCardsList(cardName)) {
-                                p.createCard(cardName, cardDescription);
-                                p.writeTodoList();
-                                out.println(p.getIpAddress()+":"+"New Card Added"+":"+member.getUsername());
+                        if(Files.exists(Path.of("../projects/" + projectName))) {
+                            if (p.isInMemberList(member.getUsername())) {
+                                if (!p.isInCardsList(cardName)) {
+                                    p.createCard(cardName, cardDescription);
+                                    p.writeTodoList();
+                                    System.out.println(p.getIpAddress() + ":" + "New Card Added" + ":" + member.getUsername());
+                                    out.println(p.getIpAddress() + ":" + "New Card Added" + ":" + member.getUsername());
 
+                                } else {
+                                    System.out.println("Card already present");
+                                    out.println("SERVER: Card already present");
+                                }
                             } else {
-                                System.out.println("Card already present");
-                                out.println("SERVER: Card already present");
+                                System.out.println("You are not in member list");
+                                out.println("SERVER: You are not in member list");
                             }
                         } else {
-                            System.out.println("You are not in member list");
-                            out.println("SERVER: You are not in member list");
+                            System.out.println("The given name does not corresponds to any project in the database");
+                            out.println("The given name does not corresponds to any project in the database");
                         }
                     }
                     break;
@@ -164,24 +185,29 @@ public class ConnectionHandler implements Runnable{
                         System.out.println("You must be logged in to add members");
                         out.println("SERVER: You must be logged in to add members");
                     } else {
-                        if (Database.containsUser(username)) {
-                            if (p.isInMemberList(member.getUsername())) {
-                                if (!p.isInMemberList(username)) {
-                                    p.addMember(username);
-                                    Database.updateProjectList(username, projectName);
-                                    System.out.println("Member added");
-                                    out.println("Member added");
+                        if(Files.exists(Path.of("../projects/" + projectName))) {
+                            if (Database.containsUser(username)) {
+                                if (p.isInMemberList(member.getUsername())) {
+                                    if (!p.isInMemberList(username)) {
+                                        p.addMember(username);
+                                        Database.updateProjectList(username, projectName);
+                                        System.out.println("Member added");
+                                        out.println("Member added");
+                                    } else {
+                                        System.out.println("User already present in the project");
+                                        out.println("User already present in the project");
+                                    }
                                 } else {
-                                    System.out.println("User already present in the project");
-                                    out.println("User already present in the project");
+                                    System.out.println("You cannot add a member to a project if you're not in that project");
+                                    out.println("You cannot add a member to a project if you're not in that project");
                                 }
                             } else {
-                                System.out.println("You cannot add a member to a project if you're not in that project");
-                                out.println("You cannot add a member to a project if you're not in that project");
+                                System.out.println("User not present");
+                                out.println("User not present");
                             }
                         } else {
-                            System.out.println("User not present");
-                            out.println("User not present");
+                            System.out.println("The given name does not corresponds to any project in the database");
+                            out.println("The given name does not corresponds to any project in the database");
                         }
                     }
                     break;
@@ -194,10 +220,12 @@ public class ConnectionHandler implements Runnable{
                         System.out.println("You must be logged in to show members");
                         out.println("SERVER: You must be logged in to show members");
                     } else {
-                        if (p.isInMemberList(member.getUsername())) {
-                            out.println(p.showMembers());
-                        } else {
-                            System.out.println("No member in the project");
+                        if(Files.exists(Path.of("../projects/" + projectName))) {
+                            if (p.isInMemberList(member.getUsername())) {
+                                out.println(p.showMembers());
+                            } else {
+                                System.out.println("No member in the project");
+                            }
                         }
                     }
                     break;
@@ -206,10 +234,17 @@ public class ConnectionHandler implements Runnable{
                     projectName = command[1];
 
                     p = new Project(projectName);
-                    if(p.isInMemberList(member.getUsername())) {
-                        out.println(p.showCards());
-                    } else {
-                        System.out.println("No member in the project");
+                    if(logged) {
+                        if(Files.exists(Path.of("../projects/" + projectName))) {
+                            if (p.isInMemberList(member.getUsername())) {
+                                out.println(p.showCards());
+                            } else {
+                                System.out.println("No member in the project");
+                            }
+                        } else {
+                            System.out.println("The given name does not corresponds to any project in the database");
+                            out.println("The given name does not corresponds to any project in the database");
+                        }
                     }
                     break;
                 case "list_projects":
@@ -234,11 +269,17 @@ public class ConnectionHandler implements Runnable{
                         System.out.println("You must be logged in to show card");
                         out.println("SERVER: You must be logged in to show card");
                     } else {
-                        if (p.isInMemberList(member.getUsername())) {
-                            out.println(p.showCard(cardName));
+                        if (Files.exists(Path.of("../projects/" + projectName))) {
+
+                            if (p.isInMemberList(member.getUsername())) {
+                                out.println(p.showCard(cardName));
+                            } else {
+                                System.out.println("No member in the project");
+                                out.println("No member in the project");
+                            }
                         } else {
-                            System.out.println("No member in the project");
-                            out.println("No member in the project");
+                            System.out.println("The given name does not corresponds to any project in the database");
+                            out.println("The given name does not corresponds to any project in the database");
                         }
                     }
                     break;
@@ -254,13 +295,18 @@ public class ConnectionHandler implements Runnable{
                         System.out.println("You must be logged in to change card status");
                         out.println("SERVER: You must be logged in to change card status");
                     } else {
-                        if (p.isInMemberList(member.getUsername())) {
-                            p.moveCard(cardName, oldList, newList);
-                            System.out.println("Card status changed");
-                            out.println(p.getIpAddress()+":"+"Card status changed to "+newList+":"+member.getUsername());
+                        if(Files.exists(Path.of("../projects/" + projectName))) {
+                            if (p.isInMemberList(member.getUsername())) {
+                                p.moveCard(cardName, oldList, newList);
+                                System.out.println("Card status changed");
+                                out.println(p.getIpAddress() + ":" + "Card status changed to " + newList + ":" + member.getUsername());
+                            } else {
+                                System.out.println("Only members of the project can change card status");
+                                out.println("SERVER: Only members of the project can change card status");
+                            }
                         } else {
-                            System.out.println("Only members of the project can change card status");
-                            out.println("SERVER: Only members of the project can change card status");
+                            System.out.println("The given name does not corresponds to any project in the database");
+                            out.println("The given name does not corresponds to any project in the database");
                         }
                     }
                     break;
@@ -276,10 +322,15 @@ public class ConnectionHandler implements Runnable{
                         System.out.println("You must be logged in to get card history");
                         out.println("SERVER: You must be logged in to get card history");
                     } else {
-                        if (p.isInMemberList(member.getUsername())) {
-                            outputHistory = p.cardHistory(cardName);
+                        if(Files.exists(Path.of("../projects/" + projectName))) {
+                            if (p.isInMemberList(member.getUsername())) {
+                                outputHistory = p.cardHistory(cardName);
+                            }
+                            out.println(outputHistory);
+                        } else {
+                            System.out.println("The given name does not corresponds to any project in the database");
+                            out.println("The given name does not corresponds to any project in the database");
                         }
-                        out.println(outputHistory);
                     }
                     break;
                 case "send":
@@ -291,10 +342,15 @@ public class ConnectionHandler implements Runnable{
 
                         p = new Project(projectName);
 
-                        if (p.isInMemberList(member.getUsername())) {
-                            out.println("success:"+p.getIpAddress()+":"+msg+":"+member.getUsername());
+                        if(Files.exists(Path.of("../projects/" + projectName))) {
+                            if (p.isInMemberList(member.getUsername())) {
+                                out.println("success:" + p.getIpAddress() + ":" + msg + ":" + member.getUsername());
+                            } else {
+                                throw new MemberNotFoundException();
+                            }
                         } else {
-                            throw new MemberNotFoundException();
+                            System.out.println("The given name does not corresponds to any project in the database");
+                            out.println("The given name does not corresponds to any project in the database");
                         }
                     }
                     break;
@@ -303,14 +359,21 @@ public class ConnectionHandler implements Runnable{
                     projectName = command[1]; //read@projectName
 
                     p = new Project(projectName);
-
-                    if(logged) {
-                        if(Database.containsUser(member.getUsername())) {
-                            if(p.isInMemberList(member.getUsername())) {
-                                System.out.println(projectName+":"+p.getIpAddress()+":"+member.getUsername());
-                                out.println(projectName+":"+p.getIpAddress());
+                    if (logged) {
+                        if(Files.exists(Path.of("../projects/" + projectName))) {
+                            if (Database.containsUser(member.getUsername())) {
+                                if (p.isInMemberList(member.getUsername())) {
+                                    System.out.println(projectName + ":" + p.getIpAddress() + ":" + member.getUsername());
+                                    out.println(projectName + ":" + p.getIpAddress());
+                                }
                             }
+                        } else {
+                            System.out.println("The given name does not corresponds to any project in the database");
+                            out.println("The given name does not corresponds to any project in the database");
                         }
+                    } else {
+                        System.out.println("Project does not exists!");
+                        out.println("Project does not exists!:[KO]");
                     }
                     break;
                 case "delete_project":
@@ -320,13 +383,19 @@ public class ConnectionHandler implements Runnable{
                     p = new Project(projectName);
 
                     if(logged) {
-                        if(p.isInMemberList(member.getUsername())) {
-                            if(p.areAllCardsDone()) {
-                                System.out.println("Deleting project");
-                                p.deleteDir(new File("../projects/"+projectName+"/"));
-                            } else {
-                                System.out.println("Not all cards are in DONE state");
+                        if(Files.exists(Path.of("../projects/" + projectName))) {
+                            if (p.isInMemberList(member.getUsername())) {
+                                if (p.areAllCardsDone()) {
+                                    System.out.println("Deleting project");
+                                    member.removeFromProject(projectName);
+                                    p.deleteDir(new File("../projects/" + projectName + "/"));
+                                } else {
+                                    System.out.println("Not all cards are in DONE state");
+                                }
                             }
+                        } else {
+                            System.out.println("The given name does not corresponds to any project in the database");
+                            out.println("The given name does not corresponds to any project in the database");
                         }
                     }
                     break;
@@ -337,6 +406,9 @@ public class ConnectionHandler implements Runnable{
             }
         } catch (MemberNotFoundException | RemoteException e) {
             e.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException a) {
+            System.out.println("Not enough parameters");
+            out.println("Not enough parameters");
         }
     }
 

@@ -17,8 +17,7 @@ public class UDPClient implements Runnable{
             InetAddress group = InetAddress.getByName(ip);
             MulticastSocket ms = new MulticastSocket(20005);
             ms.joinGroup(group);
-            System.out.print("\n");
-            while(!Thread.currentThread().isInterrupted()) {
+            while(!Thread.currentThread().isInterrupted() && TCPClient.alreadyLogged) {
                 DatagramPacket dp = new DatagramPacket(buffer, buffer.length);
                 ms.receive(dp);
                 String message = new String(dp.getData(), dp.getOffset(), dp.getLength());

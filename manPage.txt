@@ -1,0 +1,71 @@
+*****************
+******WORTH******
+*****************
+NAME
+    WORTH - Another Workflow management app
+
+DESCRIPTION
+    WORTH is a workflow management app, like Trello or EasyRedmine.
+    WORTH is a way to share a project's workflow. It represent one
+    of AGILE methodologies developed in last years. This is a
+    simplified model of similar software as Trello or EasyRedmine,
+    as we said.
+    
+OPTIONS:
+    info
+        show this page
+    
+    register <username> <password>
+        register a user with the given credentials
+        
+    login <username> <password>
+        login with the given credentials
+    
+    exit [<username>]
+        exit from the client, if logged you must insert username you logged with
+    
+    logout <username>
+        logout
+        
+    list_users <projectName>
+        list users in the system
+        
+    list_online_users
+        list users in the system with the online status
+        
+    create_project <projectName>
+        create the project with the given name
+        
+    add_card <projectName> <cardName> <cardDescription>
+        create a card in the project with the given name with the given name and description 
+    
+    add_member <projectName> <username>
+        if the user logged in and is in the given project, add member with the given project to that project.
+        
+    show_members <projectName>
+        show members in a given project
+        
+    list_projects
+        list projects in the system
+        
+    show_cards <projectName>
+        show cards in a project with the given name
+        
+    show_card <projectName> <cardName>
+        show card information with the given name in a given project
+        
+    get_card_history <projectName> <cardName>
+        show history of statuses of a specific card
+    
+    change_status <projectName> <cardName> <startingList> <endingList>
+        change the status of a given card in a given project from the startingList status to the endingList status
+    
+    send <projectName> <message>
+        send the message on the project chat
+        
+    read <projectName>
+        start receiving messages of a given project
+        
+    delete_project <projectName>
+        if the user logged in is in that project and if all cards are in the DONE status, the project will be removed
+        **THIS IS A DANGEROUS ACTION**

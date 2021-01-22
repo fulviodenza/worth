@@ -68,8 +68,7 @@
 	literate={├}{|}1 {─}{--}1 {└}{+}1 
 }
 %opening
-\title{Relazione progetto Reti WORTH
-\large https://github.com/fulviodenza/worth}
+\title{Relazione progetto Reti WORTH}
 \author{Fulvio Denza, 544006, f.denza@studenti.unipi.it}
 
 
@@ -298,8 +297,8 @@ Abbiamo poi dei metodi ausiliari
 	La moveCard contiene il seguente algoritmo: per ogni operazione ammissibile, legge il file json in cui si trova la card e ne salva il contenuto nella struttura dati, effettua la rimozione dalla struttura dati, scrive la struttura dati aggiornata nel json, legge il file json di destinazione (indicata dall'utente) e ne salva il contenuto nella struttura dati, ne aggiunge la Card, se esiste, e carica il contenuto della struttura nel file json interessato.
 \end{itemize}
 \subsection{TCPConnection e ConnectionHandler}
-Il server, come abbiamo visto nel main, istanzia l'oggetto TCPConnection e "starta" il thread.
-Lo fa istanziando una ServerSocket presso la porta indicata nel main e, all'interno di un ciclo infinito, chiama il metodo execute del threadpool, passandogli come parametri serverSocket.accept() e serverNotification,
+Il server, come abbiamo visto nel main, istanzia l'oggetto TCPConnection e "starta" il task passandolo a un thread della threadpool, che nel nostro server è implementata come una CachedThreadpool, visto che non sappiamo a priori quanti server eseguiranno.
+Lo fa istanziando una ServerSocket presso la porta indicata nel main e, all'interno di un ciclo infinito, chiama il metodo execute del , passandogli come parametri serverSocket.accept() e serverNotification,
 \begin{lstlisting}[language=java]
 while(true) {
 	pool.execute(new ConnectionHandler(serverSocket.accept(), serverNotification));
@@ -323,6 +322,7 @@ La classe TCPClient contiene il cuore della logica del client. In questa classe 
 private Socket clientSocket;
 private PrintWriter out;
 private BufferedReader in;
+public static boolean alreadyLogged
 \end{lstlisting}
 La prima variabile viene usata per far connettere la socket del client a quella del server in modo da stabilire la connessione, il secondo campo è il canale per scrivere sulla socket e il terzo campo è il canale per ricevere dalla socket.
 Il metodo cardine del client è il metodo compute, questo prende in input una stringa cmd e decide cosa fare in base al contenuto di quella stringa.
@@ -356,7 +356,7 @@ Database.getDatabase().updateMember(m);
 \end{lstlisting}
 Restituisce 1 o 0, rispettivamente se il server non riesce ad aggiungere l'utente indicato o se ci riesce.
 \paragraph{login}
-L'operazione di login incapsula (come dicevamo dei comandi che estendono CLICommand) l'intero comando in una stringa della forma\\ login@username:password. Se l'utente non inserisce caratteri speciali all'interno delle stringhe, il client manda la stringa al server.
+L'operazione di login incapsula (come dicevamo dei comandi che estendono CLICommand) l'intero comando in una stringa della forma\\ login@username:password. Se l'utente non inserisce caratteri speciali all'interno delle stringhe, il client manda la stringa al server, inoltre setta la variabile alreadyLogged a true, in modo da far sapere al client UDP quando interrompere il ciclo while (che vedremo in seguito).
 Lato server, la login effettua un controllo per vedere se l'utente esiste nel Database, in tal caso salva l'utente con lo stesso username ricevuto dal client, successivamente effettua un controllo per capire se la password coincida con quella ricevuta e, se quell'utente non è già loggato, setta il suo stato a ONLINE, setta la variabile logged a true, manda la stringa [OK SERVER: Logged in!] e effettua la sendMemberList, che abbiamo trattato in \autoref{serverRMI}.
 Il risultato della login arriva sotto forma di stringa "[OK] message" o "[KO] message", per decidere se stampare o meno la lista degli utenti il client effettua una ricerca della sottostringa "[OK]" e se questa sottostringa esiste, stampa la lista chiamando il comando ListUsers che vedremo dopo.
 \paragraph{logout}
@@ -387,8 +387,18 @@ get\_card\_history@projectName:cardName. Esso consiste nello stampare la lista d
 \paragraph{delete\_project}
 Il comando delete\_project viene incapsulato così:
 delete\_project@projectName, se c'è un utente loggato in quel terminale, il server procede al controllo della presenza dell'utente nel progetto, se questo controllo va a buon fine, il server controlla che tutte le Cards siano nello stato done, per farlo chiama il metodo areAllCardsDone della classe Project di cui si è parlato sopra (\autoref{moveCard}).
+\paragraph{exit}
+Il comando exit serve a chiudere il client e tutte le connessioni con il server ad esso relative. È stato scelto di sfruttare l'implementazione di logout, qualora il client fosse loggato con un account e poi, in ogni caso, il sistema chiude le connessioni utilizzando il metodo \textit{stopConnection} così implementato:
+\begin{lstlisting}[language=java]
+public void stopConnection() throws IOException {
+	in.close();
+	out.close();
+	clientSocket.close();
+}
+\end{lstlisting}
+\newpage
 \section{UDP}
-Sia la classe Client che la classe Server sono lato Client per evitare una piena centralizzazione del progetto, l'unica azione in cui è coinvolto il server è l'ottenimento dell'indirizzo ip del progetto da parte di ogni client.
+Sia la classe Client che la classe Server UDP sono lato Client per evitare una piena centralizzazione del progetto, l'unica azione in cui è coinvolto il server è l'ottenimento dell'indirizzo ip del progetto da parte di ogni client.
 \begin{center}
 	\includegraphics[scale=.6]{graphChat}
 \end{center}
@@ -406,7 +416,8 @@ Il client contiene due metodi:
 private void receive()
 public void run()
 \end{lstlisting}
-Il client si occupa sostanzialmente della ricezione dei messaggi ricevuti dal gruppo, si istanzia la socket sulla porta 20005, si effettua la joinGroup presso l'InetAddress del gruppo e si avvia un ciclo while che ha lo scopo di ricevere i DatagramPacket dalla socket precedentemente istanziata, converto in String i byte che arrivano e lo stampo a schermo.
+Il client si occupa sostanzialmente della ricezione dei messaggi ricevuti dal gruppo, si istanzia la socket sulla porta 20005, si effettua la joinGroup presso l'InetAddress del gruppo e si avvia un ciclo while che ha lo scopo di ricevere i DatagramPacket dalla socket precedentemente istanziata finchè l'utente non rimane loggato, converto in String i byte che arrivano e lo stampo a schermo.
 Una volta terminato il ciclo, visto che un utente può partecipare anche a più chat in una sola esecuzione del programma, chiamo la leaveGroup per chiudere la connessione con quel determinato gruppo relativo al progetto, qualora l'utente abbia la necessità di partecipare ad un altro gruppo.
 L'altro thread, è semplicemente l'override del metodo run per startare il thread che contiene il solo metodo di ricezione dei messaggi sulla chat del client.
+
 \end{document}

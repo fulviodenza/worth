@@ -15,10 +15,9 @@ public class TCPClient {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
-
+    public static boolean alreadyLogged = false;
 
     public TCPClient() {
-        boolean alreadyLogged = false;
     }
 
     public void startConnection() throws IOException {
@@ -51,15 +50,39 @@ public class TCPClient {
             Scanner scanner = new Scanner(System.in);
             ListUsers list;
 
-            Runtime.getRuntime().addShutdownHook(new Thread()
-            {
-                @Override
-                public void run() {
-                        out.println("logout");
-                }
-            });
-
             switch(cmd) {
+                case "info":
+                    BufferedReader br = new BufferedReader(new FileReader("../manPage.txt"));
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        System.out.println(line);
+                    }
+                    break;
+                case "exit":
+                    if (alreadyLogged) {
+                        System.out.println("Sending logout command");
+                        System.out.println("write your username");
+                        command[0] = new LogoutHandler();
+                        entireCommand = command[0].manage(scanner);
+                        if (!entireCommand.equals("fail")) {
+                            System.out.printf("Sent %s command\n", entireCommand);
+                            out.println(entireCommand);
+                            System.out.println("Exiting...");
+                            stopChat();
+                            stopConnection();
+                            System.out.println(in.readLine());
+
+                        } else {
+                            System.out.println("Character : or @ not allowed");
+                        }
+                    } else {
+                        System.out.println("Exiting...");
+                        stopConnection();
+                        System.exit(0);
+                    }
+
+
+                    break;
                 case "register":
                     try {
                         RemoteHandlerClient rui = new RemoteHandlerClient();
@@ -73,15 +96,16 @@ public class TCPClient {
                     }
                     break;
                 case "login":
+                    alreadyLogged = true;
                     System.out.println("Sending login command");
                     command[0] = new LoginHandler();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         System.out.printf("Sent %s command\n", entireCommand);
                         out.println(entireCommand);
                         String result = in.readLine();
                         System.out.println(result);
-                        if(result.contains("[OK]")) {
+                        if (result.contains("[OK]")) {
                             list = new ListUsers();
                             System.out.print(list.manage(scanner));
                         }
@@ -90,11 +114,12 @@ public class TCPClient {
                     }
                     break;
                 case "logout":
+                    alreadyLogged = false;
                     System.out.println("Sending logout command");
                     System.out.println("write your username");
                     command[0] = new LogoutHandler();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         System.out.printf("Sent %s command\n", entireCommand);
                         out.println(entireCommand);
                         stopChat();
@@ -116,7 +141,7 @@ public class TCPClient {
                     System.out.println("insert the project name");
                     command[0] = new CreateProject();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                     } else {
                         System.out.println("Character : or @ not allowed");
@@ -128,10 +153,11 @@ public class TCPClient {
                     System.out.println("insert the project name, the card name and the description");
                     command[0] = new CreateCard();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String result = in.readLine(); //message+username
                         String[] info = result.split(":");
+                        System.out.println(info[1]);
                         UDPServer.send(info[1], info[0], info[2]);
                     } else {
                         System.out.println("Character : or @ not allowed");
@@ -142,7 +168,7 @@ public class TCPClient {
                     System.out.println("insert the project name and the username you want to add to project");
                     command[0] = new AddUser();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                     } else {
                         System.out.println("Character : or @ not allowed");
@@ -153,7 +179,7 @@ public class TCPClient {
                     System.out.println("insert the project you want show members for");
                     command[0] = new ShowMembers();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
 
                         String memberList = in.readLine();
@@ -167,7 +193,7 @@ public class TCPClient {
                     System.out.println("Received list_projects command");
                     command[0] = new ListProjects();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String result = in.readLine();
                         result = result.replace("$", "\n");
@@ -181,7 +207,7 @@ public class TCPClient {
                     System.out.println("insert the project you want show cards for");
                     command[0] = new ShowCards();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String cardsList = in.readLine();
                         cardsList = cardsList.replace("$", "\n");
@@ -195,7 +221,7 @@ public class TCPClient {
                     System.out.println("insert the project name and the card name you want to know about");
                     command[0] = new ShowCard();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String cardInfo = in.readLine();
                         cardInfo = cardInfo.replace("$", "\n");
@@ -209,7 +235,7 @@ public class TCPClient {
                     System.out.println("insert the project name and the card name you want to know the history about");
                     command[0] = new GetCardHistory();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String cardInfoHistory = in.readLine().replace(":", "\n");
                         System.out.print(cardInfoHistory);
@@ -222,11 +248,15 @@ public class TCPClient {
                     System.out.println("insert the project name, the card name");
                     command[0] = new ChangeStatus();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String result = in.readLine(); //message+username
-                        String[] info = result.split(":");
-                        UDPServer.send(info[1], info[0], info[2]);
+                        if(result.contains("any project")) {
+                            String[] info = result.split(":");
+                            UDPServer.send(info[1], info[0], info[2]);
+                        } else {
+                            System.out.println(result);
+                        }
                     } else {
                         System.out.println("Character : or @ not allowed");
                     }
@@ -236,13 +266,14 @@ public class TCPClient {
                     System.out.println("insert the project name, the message");
                     command[0] = new Send();
                     entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
+                    if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
                         String resultChat = in.readLine();
-                        System.out.println(resultChat);
                         String[] data = resultChat.split(":");
                         if (data[0].contains("success")) {
                             UDPServer.send(data[2], data[1], data[3]);
+                        } else {
+                            System.out.println(resultChat);
                         }
                     } else {
                         System.out.println("Character : or @ not allowed");
@@ -250,27 +281,39 @@ public class TCPClient {
                     break;
                 case "read":
                     System.out.println("Received read command");
-                    System.out.println("insert the project name");
-                    command[0] = new Read();
-                    entireCommand = command[0].manage(scanner);
-                    if(!entireCommand.equals("fail")) {
-                        out.println(entireCommand);
-                        String[] info = in.readLine().split(":");
-                        startChat(info[1], info[0]);
+                    if (alreadyLogged) {
+                        System.out.println("insert the project name");
+                        command[0] = new Read();
+                        entireCommand = command[0].manage(scanner);
+                        if (!entireCommand.equals("fail")) {
+                            out.println(entireCommand);
+                            String[] info = in.readLine().split(":");
+                            if(info[1].contains("[KO]")) {
+                                System.out.println(info[0]);
+                            }else {
+                                startChat(info[1], info[0]);
+                            }
+                        } else {
+                            System.out.println("Character : or @ not allowed");
+                        }
                     } else {
-                        System.out.println("Character : or @ not allowed");
+                        System.out.println("You must be logged in!");
                     }
                     break;
                 case "delete_project":
                     System.out.println("Received delete project");
-                    command[0] = new DeleteProject();
-                    entireCommand = command[0].manage(scanner);
-                    System.out.println(entireCommand);
+                    if(alreadyLogged) {
+                        command[0] = new DeleteProject();
+                        entireCommand = command[0].manage(scanner);
+                        System.out.println(entireCommand);
 
-                    if(!entireCommand.equals("fail")) {
-                        out.println(entireCommand);
+                        if (!entireCommand.equals("fail")) {
+                            out.println(entireCommand);
+                        } else {
+                            System.out.println("Character : or @ not allowed or refused action");
+                        }
                     } else {
-                        System.out.println("Character : or @ not allowed or refused action");
+                        System.out.println("You must be logged in!");
                     }
                     break;
                 default:
@@ -278,6 +321,8 @@ public class TCPClient {
             }
         } catch (NoSuchElementException | IOException | NotBoundException e) {
             e.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException a) {
+            System.out.println("Not enough parameters");
         }
     }
 
@@ -287,8 +332,6 @@ public class TCPClient {
         out.println("read@"+projectName);
         String[] input = in.readLine().split(":");
         String ip = input[1];
-        System.out.println(ip);
-        System.out.println(ip);
         return ip;
     }
 
