@@ -1,9 +1,22 @@
 [
   {
+    "username": "luiggi",
+    "password": "gesuele",
+    "projectList": [
+      "chromium",
+      "ciaomondo",
+      "poste_italiane"
+    ]
+  },
+  {
     "username": "fulvio",
     "password": "denza",
     "projectList": [
-      "ciaomondo"
+      "ciaomondo",
+      "chromium",
+      "youtube_dl",
+      "poste_italiane",
+      "computer"
     ]
   }
 ]

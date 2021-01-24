@@ -407,7 +407,7 @@ Contiene un singolo metodo statico
 \begin{lstlisting}
 public static void send(String msg, String ip, String username)
 \end{lstlisting}
-che viene usato dal client per mandare i messaggi.
+che viene usato dal client per mandare i messaggi ogni qualvolta venga invocata la sendMessage da un utente.
 Esso prende in input il messaggio, l'ip su cui è situata la chat a cui si vuole mandare il suddetto messaggio e l'username che manda il messaggio.
 Come prima cosa aggiungo al messaggio dell'utente l'username con il carattere ":" in modo da far sapere a tutti i destinatari l'autore del messaggio, successivamente si eseguono tutte le azioni di default per mandare un DatagramPacket: si definisce il gruppo identificato per mezzo dell'ip, che verrà utilizzato per il multicasting, si istanzia l'oggetto MulticastSocket sulla porta 20005, si inserisce il messaggio in un byte array, si incapsula il tutto in un DatagramPacket e si spedisce per mezzo della socket.
 \subsection{UDP Client}

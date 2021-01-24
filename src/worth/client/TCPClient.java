@@ -173,6 +173,7 @@ public class TCPClient {
                     } else {
                         System.out.println("Character : or @ not allowed");
                     }
+                    System.out.println(in.readLine());
                     break;
                 case "show_members":
                     System.out.println("Received show_members command");
@@ -237,7 +238,7 @@ public class TCPClient {
                     entireCommand = command[0].manage(scanner);
                     if (!entireCommand.equals("fail")) {
                         out.println(entireCommand);
-                        String cardInfoHistory = in.readLine().replace(":", "\n");
+                        String cardInfoHistory = in.readLine().replace(":", " ");
                         System.out.print(cardInfoHistory);
                     } else {
                         System.out.println("Character : or @ not allowed");

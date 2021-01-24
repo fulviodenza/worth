@@ -60,7 +60,6 @@ public class Project {
                 Files.createDirectories(path);
                 String pathIP = path+"/ip_address.json";
                 Files.createFile(Path.of(pathIP));
-                System.out.println("Project created");
                 writer = new FileWriter(pathIP);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 gson.toJson(ipAddress, writer);
@@ -196,6 +195,7 @@ public class Project {
         taskList.add(newCard);
         TODO_List.add(newCard);
         updateCardList();
+        writeTodoList();
         System.out.println("Card created");
     }
 
@@ -412,7 +412,7 @@ public class Project {
 
         if(found) {
             for(String s : taskList.get(index).getCardHistory()){
-                output.append(s).append(":");
+                output.append(s).append("->:");
             }
         } else {
             output.append("No card found");

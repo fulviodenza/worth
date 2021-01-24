@@ -38,7 +38,7 @@ class LoginHandler extends CLICommand {
     public String manage(Scanner scanner) throws RemoteException {
         String username = scanner.next();
         String password = scanner.next();
-        if(username.contains(":") || username.contains("@") || password.contains("@") || password.contains(":")) {
+        if(username.isEmpty() || username.contains(":") || username.contains("@") || password.isEmpty() || password.contains("@") || password.contains(":")) {
             return "fail";
         } else {
             server.register(stub, username);
@@ -57,7 +57,7 @@ class LogoutHandler extends CLICommand {
         String username = scanner.next();
 
         server.unregister(stub, username);
-        if(username.contains(":") || username.contains("@")) {
+        if(username.contains(":") || username.contains("@") || username.isEmpty()) {
             return "fail";
         } else {
             return "logout@" + username;
@@ -73,7 +73,7 @@ class CreateProject extends CLICommand {
 
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
-        if(projectName.contains(":") || projectName.contains("@")) {
+        if(projectName.contains(":") || projectName.contains("@") || projectName.isEmpty()) {
             return "fail";
         } else {
             System.out.println("create_project@" + projectName);
@@ -141,7 +141,7 @@ class CreateCard extends CLICommand {
         String projectName = scanner.next();
         String cardName = scanner.next();
         String cardDescription = scanner.nextLine();
-        if(projectName.contains(":") || projectName.contains("@") || cardName.contains(":") || cardName.contains("@") || cardDescription.contains(":") || cardDescription.contains("@")) {
+        if(projectName.isEmpty() || cardName.isEmpty() || cardDescription.isEmpty() || projectName.contains(":") || projectName.contains("@") || cardName.contains(":") || cardName.contains("@") || cardDescription.contains(":") || cardDescription.contains("@")) {
             return "fail";
         }
         System.out.println("Sending command add_card@"+projectName+":"+cardName+":"+cardDescription);
@@ -157,7 +157,7 @@ class AddUser extends CLICommand {
     public String manage(Scanner scanner) {
         String projectName = scanner.next();
         String usernameToAdd = scanner.next();
-        if(projectName.contains(":") || projectName.contains("@") || usernameToAdd.contains(":") || usernameToAdd.contains("@")) {
+        if(projectName.isEmpty() || usernameToAdd.isEmpty() || projectName.contains(":") || projectName.contains("@") || projectName.isEmpty() || usernameToAdd.contains(":") || usernameToAdd.contains("@") || usernameToAdd.isEmpty()) {
             return "fail";
         } else {
             System.out.println("Sending command add_member@" + projectName + ":" + usernameToAdd);

@@ -1,0 +1,11 @@
+[
+  {
+    "name": "ram",
+    "description": " memoria principale",
+    "status": "IN_PROGRESS",
+    "cardHistory": [
+      "todo",
+      "in_progress"
+    ]
+  }
+]

@@ -1,1 +1,2 @@
+luiggi:OFFLINE
 fulvio:ONLINE
