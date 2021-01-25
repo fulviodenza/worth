@@ -15,6 +15,10 @@ public class TCPClient {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
+    /*
+        Dichiaro una variabile booleana che utilizzerò nell'UDP client per capire quando
+        fermare il ciclo while di lettura
+     */
     public static boolean alreadyLogged = false;
 
     public TCPClient() {
@@ -22,19 +26,29 @@ public class TCPClient {
 
     public void startConnection() throws IOException {
         if (clientSocket == null)
-            clientSocket = new Socket("localhost", 5456);
+            //Istanzio una socket su localhost, presso la porta 5456
+            clientSocket = new Socket("fulvio.dev", 5456);
         if (out == null)
             out = new PrintWriter(clientSocket.getOutputStream(), true);
         if (in == null)
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
+    /**
+     * Metodo per fermare le connessioni in atto
+     * @throws IOException
+     */
     public void stopConnection() throws IOException {
         in.close();
         out.close();
         clientSocket.close();
     }
 
+    /**
+     * Metodo per computare e inviare una richiesta dell'utente
+     * @param cmd comando da gestire
+     * @throws IOException
+     */
     public void compute(String cmd) throws IOException {
 
         try {

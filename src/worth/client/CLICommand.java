@@ -1,12 +1,10 @@
 package worth.client;
 
-import worth.server.ServerNotification;
 import worth.server.ServerNotificationInterface;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.rmi.NotBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -15,17 +13,27 @@ import java.util.Scanner;
 
 public abstract class CLICommand {
 
+    /**
+     * I comandi avranno tutti la forma command@par1:par2:...:parN,
+     * ogni classe che estende CLICommand avrà un metodo manage(Scanner scanner) per inserire gli input
+     * richiesti dal comando.
+     */
+    /*
+        con registryCB localizzo il registro sulla
+        porta 7001 con il nome "notification"
+        per le notifiche che userò nel comando di login
+     */
     final Registry registryCB = LocateRegistry.getRegistry(7001);
     final String name = "notification";
     final ServerNotificationInterface server = (ServerNotificationInterface) registryCB.lookup(name);
     final ClientNotification callbackObj = new ClientNotification();
     final ClientNotificationInterface stub = (ClientNotificationInterface) UnicastRemoteObject.exportObject(callbackObj, 0);
 
-    TCPClient client = new TCPClient();
-
+    //Costruttore vuoto, non serve fare nulla
     protected CLICommand() throws RemoteException, NotBoundException {
     }
 
+    //Metodo da implementare per ogni Handler
     public abstract String manage(Scanner scanner) throws RemoteException;
 }
 

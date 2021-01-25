@@ -2,32 +2,111 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7abeedda-afe0-4b7b-9e64-1a31590a00b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/projects/chromium/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/chromium/ip_address.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/chromium/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/chromium/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/ciaomondo/ip_address.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/ciaomondo/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/computer/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/computer/in_progress_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/computer/ip_address.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/computer/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/computer/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/poste_italiane/ip_address.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/poste_italiane/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/youtube_dl/cards.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/youtube_dl/in_progress_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/youtube_dl/ip_address.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/youtube_dl/memberList.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/youtube_dl/todo_list.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/worth/server/Constant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/allclasses-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/allpackages-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/constant-values.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/deprecated-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/element-list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/help-doc.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-10.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-11.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-12.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-13.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-14.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-15.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-16.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-17.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-18.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-6.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-7.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-8.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index-files/index-9.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/member-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/overview-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/overview-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/package-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/resources/glass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/resources/x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/external/jquery/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-bg_glass_55_fbf9ee_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-bg_glass_65_dadada_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-bg_glass_75_dadada_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-bg_glass_75_e6e6e6_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-bg_glass_95_fef1ec_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-icons_222222_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-icons_2e83ff_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-icons_454545_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-icons_888888_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/images/ui-icons_cd0a0a_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jquery-3.4.1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jquery-ui.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jquery-ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jquery-ui.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jquery-ui.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jquery-ui.structure.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jquery-ui.structure.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jszip-utils/dist/jszip-utils-ie.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jszip-utils/dist/jszip-utils-ie.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jszip-utils/dist/jszip-utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jszip-utils/dist/jszip-utils.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jszip/dist/jszip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script-dir/jszip/dist/jszip.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/serialized-form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/system-properties.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/type-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/MemberStatus.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/RegisterUserInterface.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/CLICommand.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/ClientNotification.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/ClientNotificationInterface.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/Main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/RemoteHandlerClient.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/TCPClient.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/UDPClient.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/UDPServer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/client/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/exceptions/EmptyPassword.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/exceptions/MemberNotFoundException.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/exceptions/UserAlreadyPresent.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/exceptions/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/exceptions/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/Card.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/CardStatus.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/ConnectionHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/Constant.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/Database.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/IPGenerator.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/Main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/Member.MemberJsonDeserializer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/Member.MemberJsonSerializer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/Member.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/Project.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/ServerNotification.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/ServerNotificationInterface.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/TCPConnection.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/UserRegister.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/javadoc/worth/server/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.json" beforeDir="false" afterPath="$PROJECT_DIR$/database.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/template_Article.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/doc/template_Article.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/template_Article.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/doc/template_Article.synctex.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/template_Article.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doc/template_Article.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/users.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/client/CLICommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/CLICommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/client/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/client/TCPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/ConnectionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/worth/server/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/worth/server/Project.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,19 +175,6 @@
       <command value="project" />
     </option>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -136,6 +202,8 @@
       <workItem from="1611227467088" duration="3348000" />
       <workItem from="1611324781116" duration="7003000" />
       <workItem from="1611481068957" duration="3687000" />
+      <workItem from="1611501047271" duration="2430000" />
+      <workItem from="1611515262715" duration="741000" />
     </task>
     <task id="LOCAL-00001" summary="add new task to todo list">
       <created>1610720972661</created>
